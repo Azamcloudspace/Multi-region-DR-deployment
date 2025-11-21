@@ -1,0 +1,101 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "prod"
+  },
+  {
+    "ParameterKey": "VpcCidr",
+    "ParameterValue": "10.0.0.0/16"
+  },
+  {
+    "ParameterKey": "PublicSubnet1Cidr",
+    "ParameterValue": "10.0.1.0/24"
+  },
+  {
+    "ParameterKey": "PublicSubnet2Cidr",
+    "ParameterValue": "10.0.2.0/24"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t2.micro"
+  },
+  {
+    "ParameterKey": "InstanceAmi",
+    "ParameterValue": "ami-0fa3fe0fa7920f68e"
+  },
+  {
+    "ParameterKey": "DBUsername",
+    "ParameterValue": "/db/rds/username"
+  },
+  {
+    "ParameterKey": "DBpassword",
+    "ParameterValue": "/db/rds/password"
+  },
+  {
+    "ParameterKey": "DBInstanceClass",
+    "ParameterValue": "db.t3.medium"
+  },
+  {
+    "ParameterKey": "Engine",
+    "ParameterValue": "postgresql"
+  },
+  {
+    "ParameterKey": "AlarmName",
+    "ParameterValue": "Primary-Region_HeealthCheck"
+  },
+  {
+    "ParameterKey": "DBInstanceClassReplica",
+    "ParameterValue": "db.t3.medium"
+  },
+  {
+    "ParameterKey": "HostedZoneName",
+    "ParameterValue": "azamcloudspace.click"
+  },
+  {
+    "ParameterKey": "HostedZoneId",
+    "ParameterValue": "Z0040497NT0F8RUQMJK"
+  },
+  {
+    "ParameterKey": "GitHubRepo",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "GitHubOwner",
+    "ParameterValue": "Azamcloudspace"
+  },
+  {
+    "ParameterKey": "GitHubToken",
+    "ParameterValue": "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"
+  },
+  {
+    "ParameterKey": "TopicName",
+    "ParameterValue": "Topic-AzamCloud"
+  },
+  {
+    "ParameterKey": "EndpointEmail",
+    "ParameterValue": "azamiheme19@gmail.com"
+  },
+  {
+    "ParameterKey": "CodepipelineArn",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "AlarmName",
+    "ParameterValue": "Alarm-HealthyHostCount"
+  },
+  {
+    "ParameterKey": "TargetMetricName",
+    "ParameterValue": "HealthyHostCount"
+  },
+  {
+    "ParameterKey": "AllocatedStorage",
+    "ParameterValue": "20"
+  }
+]
+
+
+
+
+
+
+
