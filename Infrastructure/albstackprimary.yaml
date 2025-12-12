@@ -17,8 +17,29 @@ Resources:
   AlbLogBucketPrimary:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${EnvironmentName}-alb-logs-primary"
+      BucketName: !Sub "${AWS::AccountId}-alb-logs-primary"
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: false
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: false
 
+  AlbLogBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AlbLogBucketPrimary
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: elasticloadbalancing.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-primary/*"
+
+  
   ALBPrimary:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
@@ -31,7 +52,9 @@ Resources:
         - Key: access_logs.s3.enabled
           Value: "true"
         - Key: access_logs.s3.bucket
-          Value: !Sub "${EnvironmentName}-alb-logs-primary"
+          Value: !Ref AlbLogBucketPrimary
+
+
 
   Listener:
     Type: AWS::ElasticLoadBalancingV2::Listener
@@ -47,6 +70,7 @@ Resources:
 Outputs:
   PrimaryALBDNS:
     Value: !GetAtt ALBPrimary.DNSName
+
 
 
 
