@@ -1,0 +1,13 @@
+{
+  "Role": "arn:aws:iam::975050225555:role/prod-s3-replication-role",
+  "Rules": [
+    {
+      "ID": "CRR",
+      "Status": "Enabled",
+      "Filter": {},
+      "Destination": {
+        "Bucket": "arn:aws:s3:::prod-secondary-dr-bucket-us-west-1"
+      }
+    }
+  ]
+}

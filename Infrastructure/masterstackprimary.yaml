@@ -1,0 +1,166 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  EnvironmentName:
+    Type: String
+  VpcCidr:
+    Type: String
+  PublicSubnet1Cidr:
+    Type: String
+  PublicSubnet2Cidr:
+    Type: String
+  InstanceAmiId:
+    Type: String
+  InstanceType:
+    Type: String
+  DBUsername:
+    Type: String
+  DBPassword:
+    Type: String
+  DBInstanceClass:
+    Type: String
+  AllocatedStorage:
+    Type: Number
+  Engine:
+    Type: String
+  HostedZoneName:
+    Type: String
+  HostedZoneId:
+    Type: String
+  GitHubRepo:
+    Type: String
+  GitHubOwner:
+    Type: String
+  GitHubToken:
+    Type: String
+    NoEcho: true
+  TopicName:
+    Type: String
+  EndpointEmail:
+    Type: String
+  CodepipeRoleArn:
+    Type: String
+  AlarmName:
+    Type: String
+  TargetMetricName:
+    Type: String
+
+Resources:
+  NetworkStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/networkstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcCidr: !Ref VpcCidr
+        PublicSubnet1Cidr: !Ref PublicSubnet1Cidr
+        PublicSubnet2Cidr: !Ref PublicSubnet2Cidr
+
+  ALBStackPrimary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstackprimary.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
+
+  ComputeStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: SsmStack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/computestack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        InstanceAmiId: !Ref InstanceAmiId
+        InstanceType: !Ref InstanceType
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        
+  DatabaseStackPrimary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/databasestackprimary.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt NetworkStackPrimary.Outputs.VpcId
+        DBUsername: !Ref DBUsername
+        DBPassword: !Ref DBPassword
+        AllocatedStorage: !Ref DBAllocatedStorage
+        DBInstanceClass: !Ref DBInstanceClass
+        Engine: !Ref Engine
+
+
+  CodeDeployStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codedeploystack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
+        TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
+
+  CodepipelineStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        GitHubRepo: !Ref GitHubRepo
+        GitHubOwner: !Ref GitHubOwner
+        GitHubToken: !Ref GitHubToken
+        CodepipeRoleArn: !Ref CodepipeRoleArn
+        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
+        CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
+
+      
+  Route53Stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53stack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        HostedZoneName: !Ref HostedZoneName
+        HostedZoneId: !Ref HostedZoneId
+        PrimaryALB: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
+        SecondaryALB: !GetAtt ALBStackSecondary.Outputs.SecondaryALB
+
+  MonitoringStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/monitoringstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        AlarmName: !Ref AlarmName
+        TargetMetricName: !Ref TargetMetricName
+        SNSAlertArn: !GetAtt SnsStack.Outputs.SNSTopic
+        PrimaryALB: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
+
+  PrimaryBucketStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/primarybucketstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+
+  SnsStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/snsstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        TopicName: !Ref TopicName
+        EndpointEmail: !Ref EndpointEmail
+
+  SsmStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/ssmstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+ 
+        

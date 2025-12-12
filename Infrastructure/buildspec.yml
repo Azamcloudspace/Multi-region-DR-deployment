@@ -1,0 +1,34 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+
+  build:
+    commands:
+      - echo Packaging templates.../
+      - aws s3 cp networkstack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp albstackprimary.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp albstacksecondary.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp computestack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp databasestackprimary.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp databasestacksecondary.yaml s3://iac-bucket/azamcloud/
+      - aws s3 cp codedeploystack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp codepipelinestack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp route53stack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp monitoringstack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp primarybucketstack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp secondarybucketstack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp snsstack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp ssmstack.yaml s3://iac-bucket-azamcloud/
+      - aws cloudformation deploy --template-file masterstackprimary.yaml --stack-name Multi-RegionDR-stack(east) --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://prod-params-primary.json --region us-east-1/
+      - value=$(aws ssm get-parameter --name "/myapp/primary/dbarn" --region us-east-1 --query 'Parameter.Value' --output text)/
+      - aws ssm put-parameter --name "/prod/db/primary/arn" --value "$value" --type String --overwrite --region eu-west-1/
+      - aws cloudformation deploy --template-file masterstacksecondary.yaml --stack-name Multi-RegionDR-stack(west) --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://prod-params-secondary.json --region us-west-1/
+      - aws s3api put-bucket-replication --bucket prod-primary-dr-bucket-us-east-1 --replication-configuration file://replication.json --region us-east-1
+     
+
+artifacts:
+  files:
+    - '**/*'

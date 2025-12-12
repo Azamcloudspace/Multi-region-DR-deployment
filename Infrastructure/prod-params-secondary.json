@@ -1,0 +1,52 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "prod"
+  },
+  {
+    "ParameterKey": "VpcCidr",
+    "ParameterValue": "10.0.0.0/16"
+  },
+  {
+    "ParameterKey": "PublicSubnet1Cidr",
+    "ParameterValue": "10.0.1.0/24"
+  },
+  {
+    "ParameterKey": "PublicSubnet2Cidr",
+    "ParameterValue": "10.0.2.0/24"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t2.micro"
+  },
+  {
+    "ParameterKey": "InstanceAmiId",
+    "ParameterValue": "ami-0fa3fe0fa7920f68e"
+  },
+  {
+    "ParameterKey": "DBInstanceClassReplica",
+    "ParameterValue": "db.t3.medium"
+  },
+  {
+    "ParameterKey": "GitHubRepo",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "GitHubOwner",
+    "ParameterValue": "Azamcloudspace"
+  },
+  {
+    "ParameterKey": "GitHubToken",
+    "ParameterValue": "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"
+  },
+  {
+    "ParameterKey": "CodepipeRoleArn",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "SourceDBArn",
+    "ParameterValue": "/prod/db/primary/arn"
+  }
+]
+
+

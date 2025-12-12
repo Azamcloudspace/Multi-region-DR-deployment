@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  EnvironmentName:
+    Type: String
+  HostedZoneName:
+    Type: String
+  HostedZoneId:
+    Type: String
+  PrimaryALB:
+    Type: String
+  SecondaryALB:
+    Type: String
+
+Resources:
+  PrimaryHealthCheck:
+    Type: AWS::Route53::HealthCheck
+    Properties:
+      HealthCheckConfig:
+        Type: HTTP
+        FullyQualifiedDomainName: !Ref PrimaryALB
+        ResourcePath: /
+        RequestInterval: 10
+        FailureThreshold: 2
+
+  PrimaryRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref HostedZoneName
+      Type: A
+      AliasTarget:
+        DNSName: !Ref PrimaryALB
+        HostedZoneId: !Ref HostedZoneId
+      SetIdentifier: primary
+      Failover: PRIMARY
+      HealthCheckId: !Ref PrimaryHealthCheck
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnviromentName}-PrimaryRecord"
+
+
+
+  SecondaryRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref HostedZoneName
+      Type: A
+      AliasTarget:
+        DNSName: !Ref SecondaryALB
+        HostedZoneId: !Ref HostedZoneId
+      SetIdentifier: secondary
+      Failover: SECONDARY
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnviromentName}-SecondaryRecord"
+
+Outputs:
+  PrimaryRecord:
+    Value: !Ref PrimaryRecord
+
+  SecondaryRecord:
+    Value: !Ref SecondaryRecord

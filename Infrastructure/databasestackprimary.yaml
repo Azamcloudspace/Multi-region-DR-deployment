@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  EnviromentName:
+    Type: String
+
+  DBUsername:
+    Type: String
+
+  DBPassword:
+    Type: String
+
+  DBInstanceClass:
+    Type: String
+
+  AllocatedStorage:
+    Type: Number
+
+  Engine: 
+    Type: String
+
+  VPCId:
+    Type: String
+
+Resources:
+
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      VpcId: !Ref VpcId
+      SubnetIds:
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvType}-db-subnet-group"
+
+  PrimaryDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: !Sub "${EnvironmentName}-primary-db"
+      Engine: !Ref Engine
+      MasterUsername: !Sub "{{resolve:ssm:${DBUsername}}}"
+      MasterUserPassword: !Sub "{{resolve:ssm:${DBPassword}}}"
+      DBInstanceClass: !Ref DBInstanceClass
+      AllocatedStorage: !Ref AllocatedStorage
+      MultiAZ: false
+      PubliclyAccessible: false
+      DBSubnetGroupName: !Ref DBSubnetGroupName
+      EnableCloudwatchLogsExports:
+        - error
+        - general
+        - slowquery
+      MonitoringInterval: 60
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnviromentName}-Primary-DB"
+
+Outputs:
+
+  PrimaryDBArn:
+    Value: !GetAtt PrimaryDB.DBInstanceArn
+
+  PrimaryDBEndpoint:
+    Value: !GetAtt PrimaryDB.Endpoint.Address

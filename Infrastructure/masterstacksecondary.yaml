@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  EnvironmentName:
+    Type: String
+  VpcCidr:
+    Type: String
+  PublicSubnet1Cidr:
+    Type: String
+  PublicSubnet2Cidr:
+    Type: String
+  InstanceAmiId:
+    Type: String
+  InstanceType:
+    Type: String
+  DBInstanceClassReplica:
+    Type: String
+  GitHubRepo:
+    Type: String
+  GitHubOwner:
+    Type: String
+  GitHubToken:
+    Type: String
+    NoEcho: true
+  CodepipeRoleArn:
+    Type: String
+  SourceDBArn:
+    Type: AWS::SSM::Parameter::Value<String>
+
+Resources:
+  NetworkStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/networkstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcCidr: !Ref VpcCidr
+        PublicSubnet1Cidr: !Ref PublicSubnet1Cidr
+        PublicSubnet2Cidr: !Ref PublicSubnet2Cidr
+
+
+  ALBStackSecondary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstacksecondary.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+
+  ComputeStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: SsmStack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/computestack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        InstanceAmiId: !Ref InstanceAmiId
+        InstanceType: !Ref InstanceType
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        
+  DatabaseStackSecondary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/databasestacksecondary.yaml
+      Parameters:
+        DBInstanceClassReplica: !Ref DBInstanceClassReplica
+        SourceDBArn: !Ref SourceDBArn
+
+  CodeDeployStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codedeploystack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
+        TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
+
+  CodepipelineStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        GitHubRepo: !Ref GitHubRepo
+        GitHubOwner: !Ref GitHubOwner
+        GitHubToken: !Ref GitHubToken
+        CodepipeRoleArn: !Ref CodepipeRoleArn
+        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
+        CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
+
+  SecondaryBucketStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/secondarybucketstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+
+  SsmStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/ssmstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
