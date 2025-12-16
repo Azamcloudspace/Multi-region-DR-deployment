@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
 Parameters:
-  EnviromentName:
+  EnvironmentName:
     Type: String
 
   DBUsername:
@@ -19,21 +19,28 @@ Parameters:
   Engine: 
     Type: String
 
-  VPCId:
+  VpcId:
     Type: String
+
+  PrivateSubnet1:
+    Type: String
+
+  PrivateSubnet2:
+   Type: String
+
+   
 
 Resources:
 
   DBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
-      VpcId: !Ref VpcId
       SubnetIds:
         - !Ref PrivateSubnet1
         - !Ref PrivateSubnet2
       Tags:
         - Key: Name
-          Value: !Sub "${EnvType}-db-subnet-group"
+          Value: !Sub "${EnvironmentName}-db-subnet-group"
 
   PrimaryDB:
     Type: AWS::RDS::DBInstance
@@ -46,7 +53,7 @@ Resources:
       AllocatedStorage: !Ref AllocatedStorage
       MultiAZ: false
       PubliclyAccessible: false
-      DBSubnetGroupName: !Ref DBSubnetGroupName
+      DBSubnetGroupName: !Ref DBSubnetGroup
       EnableCloudwatchLogsExports:
         - error
         - general
@@ -54,7 +61,7 @@ Resources:
       MonitoringInterval: 60
       Tags:
         - Key: Name
-          Value: !Sub "${EnviromentName}-Primary-DB"
+          Value: !Sub "${EnvironmentName}-Primary-DB"
 
 Outputs:
 
@@ -63,3 +70,4 @@ Outputs:
 
   PrimaryDBEndpoint:
     Value: !GetAtt PrimaryDB.Endpoint.Address
+
