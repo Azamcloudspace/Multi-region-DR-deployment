@@ -62,6 +62,20 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-Primary-DB"
+  
+  WritePrimaryDBArn:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: "/myapp/primary/dbarn"
+      Type: String
+      Value: !GetAtt PrimaryDB.Arn
+
+  WritePrimaryDBEndpoint:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: "/myapp/primary/dbendpoint"
+      Type: String
+      Value: !GetAtt PrimaryDBInstance.Endpoint.Address
 
 Outputs:
 
@@ -70,4 +84,5 @@ Outputs:
 
   PrimaryDBEndpoint:
     Value: !GetAtt PrimaryDB.Endpoint.Address
+
 
