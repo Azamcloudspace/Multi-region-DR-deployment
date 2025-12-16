@@ -44,7 +44,7 @@ Resources:
                   - s3:ReplicateObject
                   - s3:ReplicateDelete
                   - s3:ReplicateTags
-                Resource: !Sub "arn:aws:s3:::${EnvironmentName}-secondary-dr-bucket-{AWS::Region}/*"
+                Resource: !Sub "arn:aws:s3:::${EnvironmentName}-secondary-dr-bucket-${AWS::Region}/*"
 
 
 Outputs:
@@ -52,3 +52,4 @@ Outputs:
     Value: !Ref SecondaryBucket
   SecondaryBucketArn:
     Value: !GetAtt SecondaryBucket.Arn
+
