@@ -103,7 +103,7 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
-        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroup
+        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
 
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
@@ -166,3 +166,4 @@ Resources:
  
 
         
+
