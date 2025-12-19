@@ -71,6 +71,10 @@ Outputs:
   PrimaryALBDNS:
     Value: !GetAtt ALBPrimary.DNSName
 
+  Listener:
+    Value: !GetAtt Listener.Arn
+
+
 
 
 
