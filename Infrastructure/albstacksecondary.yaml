@@ -69,6 +69,10 @@ Outputs:
   SeondaryALBDNS:
     Value: !GetAtt ALBSecondary.DNSName
 
+  Listener: 
+    Value: !GetAtt Listener.Arn
+
 
 
   
+
