@@ -39,7 +39,7 @@ Resources:
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
-      RoleArn: !Ref CodepipeRole
+      RoleArn: !Ref CodepipeRoleArn
       ArtifactStore:
         Type: S3
         Location: !Ref ArtifactStoreBucket
@@ -85,3 +85,4 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
