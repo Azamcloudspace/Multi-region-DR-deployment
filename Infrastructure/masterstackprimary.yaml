@@ -128,8 +128,8 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         HostedZoneName: !Ref HostedZoneName
         HostedZoneId: !Ref HostedZoneId
-        PrimaryALB: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
-        SecondaryALB: !GetAtt ALBStackSecondary.Outputs.SecondaryALB
+        PrimaryALBDNS: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
+        SecondaryALBDNS: !GetAtt ALBStackSecondary.Outputs.SecondaryALB
 
   MonitoringStack:
     Type: AWS::CloudFormation::Stack
@@ -167,6 +167,7 @@ Resources:
  
 
         
+
 
 
 
