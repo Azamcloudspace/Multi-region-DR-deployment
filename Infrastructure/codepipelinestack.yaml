@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
 
-  EnviromentName:
+  EnvironmentName:
     Type: String
 
   GitHubOwner:
@@ -15,31 +15,74 @@ Parameters:
     Type: String
     Default: main
 
-  GitHubToken:
+  CodeStarConnectionArn:
     Type: String
-    NoEcho: true
 
   CodeDeployApplication:
     Type: String
-  
+
   CodeDeployDeploymentGroup:
     Type: String
-  
-  CodepipeRoleArn:
-    Type: String
-    
 
 Resources:
 
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${AWS::StackName}-artifacts"
+      BucketName: !Sub "${AWS::AccountId}-${AWS::Region}-${AWS::StackName}-artifacts"
+
+  CodePipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${EnvironmentName}-codepipeline-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CodePipelinePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectVersion
+                  - s3:PutObject
+                  - s3:ListBucket
+                Resource:
+                  - !Sub "arn:aws:s3:::${ArtifactStoreBucket}"
+                  - !Sub "arn:aws:s3:::${ArtifactStoreBucket}/*"
+
+              - Effect: Allow
+                Action:
+                  - codestar-connections:UseConnection
+                Resource: !Ref CodeStarConnectionArn
+
+              - Effect: Allow
+                Action:
+                  - codedeploy:CreateDeployment
+                  - codedeploy:GetApplication
+                  - codedeploy:GetApplicationRevision
+                  - codedeploy:GetDeployment
+                  - codedeploy:GetDeploymentGroup
+                  - codedeploy:RegisterApplicationRevision
+                Resource: "*"
+
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
 
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
-      RoleArn: !Ref CodepipeRoleArn
+      RoleArn: !GetAtt CodePipelineRole.Arn
       ArtifactStore:
         Type: S3
         Location: !Ref ArtifactStoreBucket
@@ -49,20 +92,19 @@ Resources:
             - Name: GitHubSource
               ActionTypeId:
                 Category: Source
-                Owner: ThirdParty
-                Provider: GitHub
+                Owner: AWS
+                Provider: CodeStarSourceConnection
                 Version: "1"
               Configuration:
-                Owner: !Ref GitHubOwner
-                Repo: !Ref GitHubRepo
-                Branch: !Ref GitHubBranch
-                OAuthToken: !Ref GitHubToken
+                ConnectionArn: !Ref CodeStarConnectionArn
+                FullRepositoryId: !Sub "${GitHubOwner}/${GitHubRepo}"
+                BranchName: !Ref GitHubBranch
               OutputArtifacts:
                 - Name: SourceOutput
 
         - Name: Deploy
           Actions:
-            - Name: Codedeploy
+            - Name: CodeDeploy
               ActionTypeId:
                 Category: Deploy
                 Owner: AWS
@@ -73,14 +115,15 @@ Resources:
               Configuration:
                 ApplicationName: !Ref CodeDeployApplication
                 DeploymentGroupName: !Ref CodeDeployDeploymentGroup
+
       LogsConfig:
         CloudWatchLogs:
           Status: ENABLED
           GroupName: /aws/codepipeline/MultiRegionDR
+
       Tags:
         - Key: Name
-          Value: !Sub "${EnviromentName}-Pipeline"
-
+          Value: !Sub "${EnvironmentName}-Pipeline"
 
 Outputs:
   PipelineName:
