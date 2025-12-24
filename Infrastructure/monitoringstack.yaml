@@ -2,11 +2,11 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
 
-  EnnvironmentName:
+  EnvironmentName:
     Type: String
   TargetMetricName:
     Type: String
-  PrimaryALB:
+  PrimaryALBID:
     Type: String
   SNSAlertArn:
     Type: String
@@ -23,7 +23,7 @@ Resources:
       MetricName: !Ref TargetMetricName
       Dimensions:
         - Name: LoadBalancer
-          Value: !Ref PrimaryALB
+          Value: !Ref PrimaryALBID
       Statistic: Average
       Period: 60
       EvaluationPeriods: 2
@@ -34,8 +34,9 @@ Resources:
         - !Ref SNSAlertArn
       Tags:
         - Key: Name
-          Value: !Sub "${EnnvironmentName}-PrimaryHealthAlarm"
+          Value: !Sub "${EnvironmentName}-PrimaryHealthAlarm"
 
   AlarmNameOut:
     Value: !Ref PrimaryHealthAlarm
+
 
