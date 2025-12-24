@@ -37,5 +37,6 @@ Resources:
         }
       Tags:
         - Key: Name
-          Value: !Sub "${EnnvironmentName}-CWAgentConfig"
+          Value: !Sub "${EnvironmentName}-CWAgentConfig"
+
 
