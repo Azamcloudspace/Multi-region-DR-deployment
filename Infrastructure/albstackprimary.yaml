@@ -72,10 +72,14 @@ Outputs:
     Value: !GetAtt ALBPrimary.DNSName
 
   PrimaryALBZoneId:
-    Value: !GetAtt PrimaryALB.CanonicalHostedZoneID
+    Value: !GetAtt ALBPrimary.CanonicalHostedZoneID
+
+  PrimaryALBID:
+    Value: !GetAtt ALBPrimary.LoadBalancerFullName
 
   Listener:
     Value: !GetAtt Listener.Arn
+
 
 
 
