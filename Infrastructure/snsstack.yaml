@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
 
-  EnviromentName:
+  EnvironmentName:
     Type: String
 
   TopicName:
@@ -18,7 +18,7 @@ Resources:
       TopicName: !Ref TopicName
       Tags:
         - Key: Name
-          Value: !Sub "${EnviromentName}-DAlertTopic"
+          Value: !Sub "${EnvironmentName}-DAlertTopic"
       
     
   EmailSubscription:
@@ -27,14 +27,11 @@ Resources:
       Endpoint: !Ref EndpointEmail
       Protocol: email
       TopicArn: !Ref DAlertTopic
-      Tags:
-        - Key: Name
-          Value: !Sub "${EnviromentName}-EmailSubscription"
 
 
 Outputs:
   SNSTopic:
-    Value: !GetAtt DAlertTopic.Arn
+    Value: !Ref DAlertTopic
   
   SNSEmailSubscription:
     Value: !Ref EmailSubscription
