@@ -69,10 +69,14 @@ Outputs:
   SeondaryALBDNS:
     Value: !GetAtt ALBSecondary.DNSName
 
+  PrimaryALBZoneId:
+    Value: !GetAtt PrimaryALB.CanonicalHostedZoneID
+
   Listener: 
     Value: !GetAtt Listener.Arn
 
 
 
   
+
 
