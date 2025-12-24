@@ -128,9 +128,9 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         HostedZoneName: !Ref HostedZoneName
         HostedZoneId: !Ref HostedZoneId
-        PrimaryALBDNS: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
-        SecondaryALBDNS: !GetAtt ALBStackSecondary.Outputs.SecondaryALB
-
+        PrimaryALBDNS: !GetAtt ALBStackPrimary.Outputs.PrimaryALBDNS
+        SecondaryALBDNS: !GetAtt ALBStackSecondary.Outputs.SecondaryALBDNS
+        
   MonitoringStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -140,7 +140,7 @@ Resources:
         AlarmName: !Ref AlarmName
         TargetMetricName: !Ref TargetMetricName
         SNSAlertArn: !GetAtt SnsStack.Outputs.SNSTopic
-        PrimaryALB: !GetAtt ALBStackPrimary.Outputs.PrimaryALB
+        PrimaryALB: !GetAtt ALBStackPrimary.Outputs.PrimaryALBDNS
 
   PrimaryBucketStack:
     Type: AWS::CloudFormation::Stack
@@ -167,6 +167,7 @@ Resources:
  
 
         
+
 
 
 
