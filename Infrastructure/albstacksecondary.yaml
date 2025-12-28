@@ -63,14 +63,28 @@ Resources:
       DefaultActions:
         - Type: forward
           TargetGroupArn: !Ref TargetGroupBlue
-
+  
+  SecondaryALBDNSParam:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /dr/secondary/alb/dns
+      Type: String
+      Value: !GetAtt ALBSecondary.DNSName
+  
+  SecondaryALBZoneParam:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /dr/secondary/alb/zoneid
+      Type: String
+      Value: !GetAtt ALBSecondary.CanonicalHostedZoneID
+  
 
 Outputs:
-  SeondaryALBDNS:
+  SecondaryALBDNS:
     Value: !GetAtt ALBSecondary.DNSName
-
+  
   PrimaryALBZoneId:
-    Value: !GetAtt PrimaryALB.CanonicalHostedZoneID
+    Value: !GetAtt ALBSecondary.CanonicalHostedZoneID
 
   Listener: 
     Value: !GetAtt Listener.Arn
@@ -78,5 +92,6 @@ Outputs:
 
 
   
+
 
 
