@@ -119,7 +119,7 @@ Resources:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/databasestackprimary.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
-        VpcId: !GetAtt NetworkStackPrimary.Outputs.VpcId
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
         DBUsername: !Ref DBUsername
         DBPassword: !Ref DBPassword
         AllocatedStorage: !Ref DBAllocatedStorage
@@ -199,6 +199,7 @@ Resources:
  
 
         
+
 
 
 
