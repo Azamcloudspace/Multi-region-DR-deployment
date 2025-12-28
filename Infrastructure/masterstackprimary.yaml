@@ -4,47 +4,80 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   EnvironmentName:
     Type: String
+    
   VpcCidr:
     Type: String
+    
   PublicSubnet1Cidr:
     Type: String
+    
   PublicSubnet2Cidr:
     Type: String
+    
   InstanceAmiId:
     Type: String
+    
   InstanceType:
     Type: String
+    
   DBUsername:
     Type: String
+    
   DBPassword:
     Type: String
+    
   DBInstanceClass:
     Type: String
+    
   AllocatedStorage:
     Type: Number
+    
   Engine:
     Type: String
+    
   HostedZoneName:
     Type: String
+    
   HostedZoneId:
     Type: String
+    
   GitHubRepo:
     Type: String
+    
   GitHubOwner:
     Type: String
+    
   GitHubToken:
-    Type: String
+    Type: String  
     NoEcho: true
+    
   TopicName:
     Type: String
+    
   EndpointEmail:
     Type: String
+    
   CodepipeRoleArn:
     Type: String
+    
   AlarmName:
     Type: String
+    
   TargetMetricName:
     Type: String
+    
+ PrimaryALBDNS:
+    Type: String
+
+  PrimaryALBZoneId:
+    Type: String
+
+  SecondaryALBDNS:
+    Type: String
+
+  SecondaryALBZoneId:
+    Type: String
+  
 
 Resources:
   NetworkStack:
@@ -167,6 +200,7 @@ Resources:
  
 
         
+
 
 
 
