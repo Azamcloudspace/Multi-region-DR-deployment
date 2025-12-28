@@ -6,22 +6,21 @@ Parameters:
 
   HostedZoneName:
     Type: String
-    Description: example.com.
 
   HostedZoneId:
     Type: String
 
   PrimaryALBDNS:
-    Type: String
+    Type: AWS::SSM::Parameter::Value<String>
 
   PrimaryALBZoneId:
-    Type: String
+    Type: AWS::SSM::Parameter::Value<String>
 
   SecondaryALBDNS:
-    Type: String
+    Type: AWS::SSM::Parameter::Value<String>
 
   SecondaryALBZoneId:
-    Type: String
+    Type: AWS::SSM::Parameter::Value<String>
 
 Resources:
 
@@ -57,4 +56,5 @@ Outputs:
 
   SecondaryRecord:
     Value: !Ref SecondaryRecord
+
 
