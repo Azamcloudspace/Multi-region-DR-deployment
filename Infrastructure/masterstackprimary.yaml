@@ -78,7 +78,6 @@ Parameters:
   SecondaryALBZoneId:
     Type: String
   
-
 Resources:
   NetworkStack:
     Type: AWS::CloudFormation::Stack
@@ -127,7 +126,6 @@ Resources:
         DBInstanceClass: !Ref DBInstanceClass
         Engine: !Ref Engine
 
-
   CodeDeployStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -160,9 +158,10 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         HostedZoneName: !Ref HostedZoneName
-        HostedZoneId: !Ref HostedZoneId
-        PrimaryALBDNS: !GetAtt ALBStackPrimary.Outputs.PrimaryALBDNS
-        SecondaryALBDNS: !GetAtt ALBStackSecondary.Outputs.SecondaryALBDNS
+        PrimaryALBZoneId: !Ref PrimaryALBZoneId
+        SecondaryALBZoneId: !Ref SecondaryALBZoneId
+        PrimaryALBDNS: !Ref PrimaryALBDNS
+        SecondaryALBDNS: !Ref SecondaryALBDNS
         
   MonitoringStack:
     Type: AWS::CloudFormation::Stack
@@ -200,6 +199,7 @@ Resources:
  
 
         
+
 
 
 
