@@ -47,9 +47,8 @@ Parameters:
   GitHubOwner:
     Type: String
     
-  GitHubToken:
+  CodeStarConnectionArn:
     Type: String  
-    NoEcho: true
     
   TopicName:
     Type: String
@@ -145,7 +144,7 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         GitHubRepo: !Ref GitHubRepo
         GitHubOwner: !Ref GitHubOwner
-        GitHubToken: !Ref GitHubToken
+        CodeStarConnectionArn: !Ref CodeStarConnectionArn
         CodepipeRoleArn: !Ref CodepipeRoleArn
         CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
         CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
@@ -199,6 +198,7 @@ Resources:
  
 
         
+
 
 
 
