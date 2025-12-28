@@ -122,7 +122,7 @@ Resources:
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
         DBUsername: !Ref DBUsername
         DBPassword: !Ref DBPassword
-        AllocatedStorage: !Ref DBAllocatedStorage
+        AllocatedStorage: !Ref AllocatedStorage
         DBInstanceClass: !Ref DBInstanceClass
         Engine: !Ref Engine
 
@@ -199,6 +199,7 @@ Resources:
  
 
         
+
 
 
 
