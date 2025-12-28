@@ -89,9 +89,10 @@ Outputs:
   Listener: 
     Value: !GetAtt Listener.Arn
 
-
-
+  SecondaryALBID:
+    Value: !GetAtt ALBSecondary.LoadBalancerFullName
   
+
 
 
 
