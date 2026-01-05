@@ -88,17 +88,6 @@ Resources:
         PublicSubnet1Cidr: !Ref PublicSubnet1Cidr
         PublicSubnet2Cidr: !Ref PublicSubnet2Cidr
 
-  ALBStackPrimary:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstackprimary.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        VpcId: !GetAtt NetworkStack.Outputs.VpcId
-        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
-        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
-        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
-
   ComputeStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: SsmStack
@@ -111,6 +100,17 @@ Resources:
         PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
+
+  ALBStackPrimary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstackprimary.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         
   DatabaseStackPrimary:
     Type: AWS::CloudFormation::Stack
@@ -149,7 +149,6 @@ Resources:
         CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
         CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
 
-      
   Route53Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -161,6 +160,15 @@ Resources:
         SecondaryALBZoneId: !Ref SecondaryALBZoneId
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
+
+  SnsStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/snsstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        TopicName: !Ref TopicName
+        EndpointEmail: !Ref EndpointEmail
         
   MonitoringStack:
     Type: AWS::CloudFormation::Stack
@@ -180,15 +188,6 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
-  SnsStack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/snsstack.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        TopicName: !Ref TopicName
-        EndpointEmail: !Ref EndpointEmail
-
   SsmStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -198,6 +197,7 @@ Resources:
  
 
         
+
 
 
 
