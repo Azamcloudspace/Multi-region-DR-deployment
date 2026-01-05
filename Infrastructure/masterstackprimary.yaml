@@ -65,15 +65,15 @@ Parameters:
   TargetMetricName:
     Type: String
     
- PrimaryALBDNS:
+  PrimaryALBDNS:
     Type: String
-
+  
   PrimaryALBZoneId:
     Type: String
 
   SecondaryALBDNS:
     Type: String
-
+  
   SecondaryALBZoneId:
     Type: String
   
@@ -197,6 +197,7 @@ Resources:
  
 
         
+
 
 
 
