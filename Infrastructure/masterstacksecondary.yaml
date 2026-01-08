@@ -26,6 +26,16 @@ Parameters:
     Type: String
   SourceDBArn:
     Type: String
+  HostedZoneName:
+    Type: String
+  PrimaryALBZoneId:
+    Type: String
+  SecondaryALBZoneId:
+    Type: String
+  PrimaryALBDNS:
+    Type: String
+  SecondaryALBDNS:
+    Type: String
 
 Resources:
   NetworkStack:
@@ -107,6 +117,19 @@ Resources:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/ssmstack.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
+
+  Route53Stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53stack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        HostedZoneName: !Ref HostedZoneName
+        PrimaryALBZoneId: !Ref PrimaryALBZoneId
+        SecondaryALBZoneId: !Ref SecondaryALBZoneId
+        PrimaryALBDNS: !Ref PrimaryALBDNS
+        SecondaryALBDNS: !Ref SecondaryALBDNS
+
 
 
 
