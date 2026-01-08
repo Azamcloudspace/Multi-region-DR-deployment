@@ -44,9 +44,26 @@
     "ParameterValue": ""
   },
   {
+    "ParameterKey": "PrimaryALBZoneId",
+    "ParameterValue": "/dr/primary/alb/zoneid"
+  },
+  {
+    "ParameterKey": "SecondaryyALBZoneId",
+    "ParameterValue": "/dr/secondary/alb/zoneid"
+  },
+  {
+    "ParameterKey": "PrimaryALBDNS",
+    "ParameterValue": "/dr/primary/alb/dns"
+  },
+  {
+    "ParameterKey": "SecondaryALBDNS",
+    "ParameterValue": "/dr/secondary/alb/dns"
+  },
+  {
     "ParameterKey": "SourceDBArn",
     "ParameterValue": "/prod/db/primary/arn"
   }
 ]
+
 
 
