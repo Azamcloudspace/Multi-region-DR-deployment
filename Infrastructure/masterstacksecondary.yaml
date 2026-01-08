@@ -25,7 +25,7 @@ Parameters:
   CodepipeRoleArn:
     Type: String
   SourceDBArn:
-    Type: AWS::SSM::Parameter::Value<String>
+    Type: String
 
 Resources:
   NetworkStack:
@@ -107,5 +107,6 @@ Resources:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/ssmstack.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
+
 
 
