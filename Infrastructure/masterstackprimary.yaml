@@ -1,4 +1,3 @@
-
 AWSTemplateFormatVersion: '2010-09-09'
 
 Parameters:
@@ -65,17 +64,6 @@ Parameters:
   TargetMetricName:
     Type: String
     
-  PrimaryALBDNS:
-    Type: String
-  
-  PrimaryALBZoneId:
-    Type: String
-
-  SecondaryALBDNS:
-    Type: String
-  
-  SecondaryALBZoneId:
-    Type: String
   
 Resources:
   NetworkStack:
@@ -149,18 +137,6 @@ Resources:
         CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
         CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
 
-  Route53Stack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53stack.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        HostedZoneName: !Ref HostedZoneName
-        PrimaryALBZoneId: !Ref PrimaryALBZoneId
-        SecondaryALBZoneId: !Ref SecondaryALBZoneId
-        PrimaryALBDNS: !Ref PrimaryALBDNS
-        SecondaryALBDNS: !Ref SecondaryALBDNS
-
   SnsStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -197,6 +173,7 @@ Resources:
  
 
         
+
 
 
 
