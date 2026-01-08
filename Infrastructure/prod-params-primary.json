@@ -76,8 +76,8 @@
     "ParameterValue": "Azamcloudspace"
   },
   {
-    "ParameterKey": "GitHubToken",
-    "ParameterValue": "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"
+    "ParameterKey": "CodeStarConnectionArn",
+    "ParameterValue": ""
   },
   {
     "ParameterKey": "TopicName",
@@ -104,6 +104,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
