@@ -20,7 +20,7 @@
     "ParameterValue": "t2.micro"
   },
   {
-    "ParameterKey": "InstanceAmi",
+    "ParameterKey": "InstanceAmiId",
     "ParameterValue": "ami-0fa3fe0fa7920f68e"
   },
   {
@@ -100,6 +100,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
