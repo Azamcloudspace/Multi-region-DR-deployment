@@ -48,7 +48,7 @@
     "ParameterValue": "/dr/primary/alb/zoneid"
   },
   {
-    "ParameterKey": "SecondaryyALBZoneId",
+    "ParameterKey": "SecondaryALBZoneId",
     "ParameterValue": "/dr/secondary/alb/zoneid"
   },
   {
@@ -64,6 +64,7 @@
     "ParameterValue": "/prod/db/primary/arn"
   }
 ]
+
 
 
 
