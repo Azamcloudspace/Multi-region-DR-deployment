@@ -40,10 +40,6 @@
     "ParameterValue": "postgresql"
   },
   {
-    "ParameterKey": "AlarmName",
-    "ParameterValue": "Primary-Region_HeealthCheck"
-  },
-  {
     "ParameterKey": "DBInstanceClassReplica",
     "ParameterValue": "db.t3.medium"
   },
@@ -104,6 +100,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
