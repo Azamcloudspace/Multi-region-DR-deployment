@@ -28,7 +28,7 @@
     "ParameterValue": "/db/rds/username"
   },
   {
-    "ParameterKey": "DBpassword",
+    "ParameterKey": "DBPassword",
     "ParameterValue": "/db/rds/password"
   },
   {
@@ -100,6 +100,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
