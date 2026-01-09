@@ -37,7 +37,7 @@
   },
   {
     "ParameterKey": "Engine",
-    "ParameterValue": "postgresql"
+    "ParameterValue": "postgres"
   },
   {
     "ParameterKey": "DBInstanceClassReplica",
@@ -52,7 +52,7 @@
     "ParameterValue": "/dr/primary/alb/zoneid"
   },
   {
-    "ParameterKey": "SecondaryyALBZoneId",
+    "ParameterKey": "SecondaryALBZoneId",
     "ParameterValue": "/dr/secondary/alb/zoneid"
   },
   {
@@ -100,6 +100,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
