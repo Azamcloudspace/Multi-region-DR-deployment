@@ -100,7 +100,6 @@ Resources:
         GitHubRepo: !Ref GitHubRepo
         GitHubOwner: !Ref GitHubOwner
         CodeStarConnectionArn: !Ref CodeStarConnectionArn
-        CodepipeRoleArn: !Ref CodepipeRoleArn
         CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
         CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
 
@@ -129,6 +128,7 @@ Resources:
         SecondaryALBZoneId: !Ref SecondaryALBZoneId
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
+
 
 
 
