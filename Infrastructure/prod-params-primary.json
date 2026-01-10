@@ -84,10 +84,6 @@
     "ParameterValue": "azamiheme19@gmail.com"
   },
   {
-    "ParameterKey": "CodepipeRoleArn",
-    "ParameterValue": ""
-  },
-  {
     "ParameterKey": "AlarmName",
     "ParameterValue": "Alarm-HealthyHostCount"
   },
@@ -100,6 +96,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
