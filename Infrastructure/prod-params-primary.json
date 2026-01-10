@@ -65,7 +65,7 @@
   },
   {
     "ParameterKey": "GitHubRepo",
-    "ParameterValue": ""
+    "ParameterValue": "Multi-region-DR-deployment"
   },
   {
     "ParameterKey": "GitHubOwner",
@@ -73,7 +73,7 @@
   },
   {
     "ParameterKey": "CodeStarConnectionArn",
-    "ParameterValue": ""
+    "ParameterValue": "arn:aws:codeconnections:us-east-1:975050225555:connection/b764abe8-bf03-4f0f-bfd5-d00aaa612924"
   },
   {
     "ParameterKey": "TopicName",
@@ -100,6 +100,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
