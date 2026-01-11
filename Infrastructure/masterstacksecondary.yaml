@@ -22,8 +22,6 @@ Parameters:
   GitHubToken:
     Type: String
     NoEcho: true
-  CodepipeRoleArn:
-    Type: String
   SourceDBArn:
     Type: String
   HostedZoneName:
@@ -131,6 +129,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
