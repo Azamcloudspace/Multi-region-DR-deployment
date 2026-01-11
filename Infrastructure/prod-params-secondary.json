@@ -56,10 +56,15 @@
     "ParameterValue": "/dr/secondary/alb/dns"
   },
   {
+    "ParameterKey": "HostedZoneId",
+    "ParameterValue": "Z0040497NT0F8RUQMJK"
+  },
+  {
     "ParameterKey": "SourceDBArn",
     "ParameterValue": "/prod/db/primary/arn"
   }
 ]
+
 
 
 
