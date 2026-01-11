@@ -3,9 +3,7 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   EnvironmentName:
     Type: String
-  SecondaryBucketArn:
-    Type: String
-
+    
 Resources:
   PrimaryBucket:
     Type: AWS::S3::Bucket
@@ -56,4 +54,5 @@ Outputs:
     Value: !Ref PrimaryBucket
   ReplicationRoleArn:
     Value: !GetAtt ReplicationRole.Arn
+
 
