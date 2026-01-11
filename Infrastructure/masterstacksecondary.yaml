@@ -36,6 +36,8 @@ Parameters:
     Type: String
   SecondaryALBDNS:
     Type: String
+  HostedZoneID:
+    Type: String
 
 Resources:
   NetworkStack:
@@ -128,6 +130,8 @@ Resources:
         SecondaryALBZoneId: !Ref SecondaryALBZoneId
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
+        HostedZoneID: !Ref HostedZoneID
+
 
 
 
