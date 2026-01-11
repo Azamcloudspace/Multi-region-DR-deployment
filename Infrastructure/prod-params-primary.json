@@ -44,10 +44,6 @@
     "ParameterValue": "db.t3.medium"
   },
   {
-    "ParameterKey": "HostedZoneName",
-    "ParameterValue": "azamcloudspace.click"
-  },
-  {
     "ParameterKey": "PrimaryALBZoneId",
     "ParameterValue": "/dr/primary/alb/zoneid"
   },
@@ -96,6 +92,7 @@
     "ParameterValue": "20"
   }
 ]
+
 
 
 
