@@ -60,10 +60,15 @@
     "ParameterValue": "Z0040497NT0F8RUQMJK"
   },
   {
+    "ParameterKey": "HostedZoneName",
+    "ParameterValue": "azamcloudspace.click"
+  },
+  {
     "ParameterKey": "SourceDBArn",
     "ParameterValue": "/prod/db/primary/arn"
   }
 ]
+
 
 
 
