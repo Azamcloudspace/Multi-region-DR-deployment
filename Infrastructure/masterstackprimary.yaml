@@ -37,9 +37,6 @@ Parameters:
   HostedZoneName:
     Type: String
     
-  HostedZoneId:
-    Type: String
-    
   GitHubRepo:
     Type: String
     
@@ -53,9 +50,6 @@ Parameters:
     Type: String
     
   EndpointEmail:
-    Type: String
-    
-  CodepipeRoleArn:
     Type: String
     
   AlarmName:
@@ -172,6 +166,7 @@ Resources:
  
 
         
+
 
 
 
