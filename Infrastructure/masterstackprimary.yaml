@@ -87,6 +87,7 @@ Resources:
         PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        
 
   ALBStackPrimary:
     Type: AWS::CloudFormation::Stack
@@ -111,6 +112,8 @@ Resources:
         AllocatedStorage: !Ref AllocatedStorage
         DBInstanceClass: !Ref DBInstanceClass
         Engine: !Ref Engine
+        PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
+        PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
 
   CodeDeployStack:
     Type: AWS::CloudFormation::Stack
@@ -171,6 +174,7 @@ Resources:
  
 
         
+
 
 
 
