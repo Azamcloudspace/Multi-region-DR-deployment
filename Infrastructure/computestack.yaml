@@ -139,7 +139,7 @@ Outputs:
   AutoScalingGroupName:
     Value: !Ref AutoScalingGroup
     
-  AppSecurityGroupId:
+  AppSecurityGroup:
     Value: !Ref AppSecurityGroup
 
   InstanceProfileName:
@@ -150,6 +150,7 @@ Outputs:
 
   TargetGroupGreen:
     Value: !Ref TargetGroupGreen
+
 
 
 
