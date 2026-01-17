@@ -100,7 +100,6 @@ Resources:
 
   PublicRoute:
     Type: AWS::EC2::Route
-    DependsOn: AttachIGW
     Properties:
       RouteTableId: !Ref PublicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
@@ -121,7 +120,7 @@ Resources:
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref VpcId
+      VpcId: !Ref VPC
       CidrBlock: !Ref PrivateSubnet1Cidr
       AvailabilityZone: !Select [0, !GetAZs ""]
       MapPublicIpOnLaunch: false
@@ -132,7 +131,7 @@ Resources:
   PrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref VpcId
+      VpcId: !Ref VPC
       CidrBlock: !Ref PrivateSubnet2Cidr
       AvailabilityZone: !Select [1, !GetAZs ""]
       MapPublicIpOnLaunch: false
@@ -143,7 +142,7 @@ Resources:
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref VpcId
+      VpcId: !Ref VPC
 
   PrivateRoute:
     Type: AWS::EC2::Route
@@ -176,5 +175,6 @@ Outputs:
     Value: !Ref PrivateSubnet1
   PrivateSubnet2:
     Value: !Ref PrivateSubnet2
+
 
 
