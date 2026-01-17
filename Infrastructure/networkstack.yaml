@@ -43,16 +43,28 @@ Resources:
       VpcId: !Ref VPC
       InternetGatewayId: !Ref InternetGateway
 
-  NatEIP:
+  NatEIP1:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+
+  NatEIP2:
     Type: AWS::EC2::EIP
     Properties:
       Domain: vpc
   
-  NatGateway:
+  NatGateway1:
     Type: AWS::EC2::NatGateway
     Properties:
-      AllocationId: !GetAtt NatEIP.AllocationId
+      AllocationId: !GetAtt NatEIP1.AllocationId
       SubnetId: !Ref PublicSubnet1
+  
+  NatGateway2:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatEIP2.AllocationId
+      SubnetId: !Ref PublicSubnet2
+
 
   PublicSubnet1:
     Type: AWS::EC2::Subnet
@@ -164,4 +176,5 @@ Outputs:
     Value: !Ref PrivateSubnet1
   PrivateSubnet2:
     Value: !Ref PrivateSubnet2
+
 
