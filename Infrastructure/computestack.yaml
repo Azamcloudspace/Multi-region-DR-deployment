@@ -11,10 +11,10 @@ Parameters:
   InstanceType:
     Type: String
 
-  PublicSubnet1:
+  PrivateSubnet1:
     Type: String
 
-  PublicSubnet2:
+  PrivateSubnet2:
     Type: String
 
   VpcId:
@@ -119,8 +119,8 @@ Resources:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
       VPCZoneIdentifier:
-        - !Ref PublicSubnet1
-        - !Ref PublicSubnet2
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
       LaunchTemplate:
         LaunchTemplateId: !Ref LaunchTemplate
         Version: !GetAtt LaunchTemplate.LatestVersionNumber
@@ -150,5 +150,6 @@ Outputs:
 
   TargetGroupGreen:
     Value: !Ref TargetGroupGreen
+
 
 
