@@ -12,6 +12,12 @@ Parameters:
     
   PublicSubnet2Cidr:
     Type: String
+  
+  PrivateSubnet1Cidr:
+    Type: String
+  
+  PrivateSubnet2Cidr:
+    Type: String
     
   InstanceAmiId:
     Type: String
@@ -66,6 +72,8 @@ Resources:
         VpcCidr: !Ref VpcCidr
         PublicSubnet1Cidr: !Ref PublicSubnet1Cidr
         PublicSubnet2Cidr: !Ref PublicSubnet2Cidr
+        PrivateSubnet1Cidr: !Ref PrivateSubnet1Cidr
+        PrivateSubnet2Cidr: !Ref PrivateSubnet2Cidr
 
   ComputeStack:
     Type: AWS::CloudFormation::Stack
@@ -163,6 +171,7 @@ Resources:
  
 
         
+
 
 
 
