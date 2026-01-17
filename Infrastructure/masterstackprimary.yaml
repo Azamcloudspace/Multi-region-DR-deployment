@@ -60,8 +60,8 @@ Parameters:
     
   TargetMetricName:
     Type: String
+
     
-  
 Resources:
   NetworkStack:
     Type: AWS::CloudFormation::Stack
@@ -114,6 +114,7 @@ Resources:
         Engine: !Ref Engine
         PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
         PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
+        AppSecurityGroup: !GetAtt ComputeStack.Outputs.AppSecurityGroup
 
   CodeDeployStack:
     Type: AWS::CloudFormation::Stack
@@ -174,6 +175,7 @@ Resources:
  
 
         
+
 
 
 
