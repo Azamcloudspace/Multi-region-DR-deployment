@@ -11,6 +11,8 @@ Parameters:
     Type: String
   TargetGroupBlue:
     Type: String
+  AlbSecurityGroup:
+    Type: String
 
 Resources:
 
@@ -38,31 +40,6 @@ Resources:
               Service: elasticloadbalancing.amazonaws.com
             Action: s3:PutObject
             Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-primary/*"
-  
-  AlbSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Allow HTTP and HTTPS from the internet to ALB
-      VpcId: !Ref VpcId
-  
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-  
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 0.0.0.0/0
-  
-      SecurityGroupEgress:
-        - IpProtocol: -1
-          CidrIp: 0.0.0.0/0
-  
-      Tags:
-        - Key: Name
-          Value: !Sub "${EnvironmentName}-alb-sg"
   
   ALBPrimary:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -118,8 +95,6 @@ Outputs:
   Listener:
     Value: !GetAtt Listener.Arn
 
-  AlbSecurityGroup:
-    Value: !Ref AlbSecurityGroup
 
 
 
