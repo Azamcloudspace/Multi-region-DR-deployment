@@ -64,6 +64,7 @@ Resources:
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
         PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
 
   ComputeStack:
     Type: AWS::CloudFormation::Stack
@@ -77,6 +78,7 @@ Resources:
         PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
         
   DatabaseStackSecondary:
     Type: AWS::CloudFormation::Stack
@@ -135,6 +137,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
