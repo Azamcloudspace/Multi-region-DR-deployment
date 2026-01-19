@@ -28,7 +28,7 @@ Resources:
   AppSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Allow http access
+      GroupDescription: Allow http access ALB Only
       VpcId: !Ref VpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -159,4 +159,5 @@ Outputs:
 
 
  
+
 
