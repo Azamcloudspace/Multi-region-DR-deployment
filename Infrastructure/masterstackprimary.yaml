@@ -87,6 +87,7 @@ Resources:
         PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
         PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
         
 
   ALBStackPrimary:
@@ -175,6 +176,7 @@ Resources:
  
 
         
+
 
 
 
