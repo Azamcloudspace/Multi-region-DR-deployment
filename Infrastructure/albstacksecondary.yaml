@@ -11,6 +11,8 @@ Parameters:
     Type: String
   TargetGroupBlue:
     Type: String
+  AlbSecurityGroup:
+    Type: String
     
 Resources:
   
@@ -95,6 +97,7 @@ Outputs:
     Value: !GetAtt ALBSecondary.LoadBalancerFullName
 
   
+
 
 
 
