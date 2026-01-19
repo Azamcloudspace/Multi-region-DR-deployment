@@ -118,6 +118,10 @@ Outputs:
   Listener:
     Value: !GetAtt Listener.Arn
 
+  AlbSecurityGroupPrimary:
+    Value: !Ref AlbSecurityGroup
+
+
 
 
 
