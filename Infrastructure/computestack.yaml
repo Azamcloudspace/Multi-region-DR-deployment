@@ -20,6 +20,9 @@ Parameters:
   VpcId:
     Type: String
 
+  AlbSecurityGroup:
+    Type: String
+
 Resources:
 
   AppSecurityGroup:
@@ -31,7 +34,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          CidrIp: 0.0.0.0/0
+          SourceSecurityGroupId: !Ref AlbSecurityGroup
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-app-sg"
@@ -156,3 +159,4 @@ Outputs:
 
 
  
+
