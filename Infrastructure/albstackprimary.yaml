@@ -39,7 +39,7 @@ Resources:
             Action: s3:PutObject
             Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-primary/*"
   
-  AlbSecurityGroup:
+  AlbSecurityGroupPrimary:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow HTTP and HTTPS from the internet to ALB
@@ -119,7 +119,8 @@ Outputs:
     Value: !GetAtt Listener.Arn
 
   AlbSecurityGroupPrimary:
-    Value: !Ref AlbSecurityGroup
+    Value: !Ref AlbSecurityGroupPrimary
+
 
 
 
