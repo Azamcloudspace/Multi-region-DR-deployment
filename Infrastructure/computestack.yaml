@@ -55,6 +55,8 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
         - arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+        - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -159,5 +161,6 @@ Outputs:
 
 
  
+
 
 
