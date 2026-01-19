@@ -40,7 +40,7 @@ Resources:
             Action: s3:PutObject
             Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-secondary/*"
 
-  AlbSecurityGroupSecondary:
+  AlbSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow HTTP and HTTPS from the internet to ALB
@@ -118,9 +118,10 @@ Outputs:
   SecondaryALBID:
     Value: !GetAtt ALBSecondary.LoadBalancerFullName
 
-  AlbSecurityGroupSecondary:
-    Value: !Ref AlbSecurityGroupSecondary
+  AlbSecurityGroup:
+    Value: !Ref AlbSecurityGroup
   
+
 
 
 
