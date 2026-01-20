@@ -16,12 +16,11 @@ Resources:
       DBInstanceClass: !Ref DBInstanceClassReplica
       PubliclyAccessible: false
       EnableCloudwatchLogsExports:
-        - error
-        - general
-        - slowquery
+        - postgresql
       MonitoringInterval: 0
 
 Outputs:
   ReplicaEndpoint:
     Value: !GetAtt ReadReplica.Endpoint.Address
+
 
