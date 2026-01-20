@@ -73,7 +73,7 @@ Resources:
       VPCSecurityGroups:
         - !Ref RDSSecurityGroup
       EnableCloudwatchLogsExports:
-        - error
+        - postgresql
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-Primary-DB"
@@ -102,6 +102,7 @@ Outputs:
 
   RDSSecurityGroupId:
     Value: !Ref RDSSecurityGroup
+
 
 
 
