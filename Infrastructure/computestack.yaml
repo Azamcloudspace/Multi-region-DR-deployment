@@ -134,7 +134,7 @@ Resources:
       MaxSize: '3'
       DesiredCapacity: '1'
       TargetGroupARNs:
-        - !Ref TargetGroupBlue
+        - !GetAtt TargetGroupBlue.Arn
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-asg"
@@ -168,6 +168,7 @@ Outputs:
 
 
  
+
 
 
 
