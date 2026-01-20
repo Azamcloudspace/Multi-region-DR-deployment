@@ -34,12 +34,22 @@ Resources:
     Properties:
       Bucket: !Ref AlbLogBucketPrimary
       PolicyDocument:
+        Version: "2012-10-17"
         Statement:
-          - Effect: Allow
+          - Sid: ALBLogDeliveryWrite
+            Effect: Allow
             Principal:
-              Service: elasticloadbalancing.amazonaws.com
+              AWS: arn:aws:iam::127311923021:root
             Action: s3:PutObject
-            Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-primary/*"
+            Resource: !Sub "arn:aws:s3:::${AlbLogBucketPrimary}/AWSLogs/${AWS::AccountId}/*"
+         
+          - Sid: ALBLogDeliveryAclCheck
+            Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::127311923021:root
+            Action: s3:GetBucketAcl
+            Resource: !Sub "arn:aws:s3:::${AlbLogBucketPrimary}"
+
   
   ALBPrimary:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -94,6 +104,7 @@ Outputs:
 
   Listener:
     Value: !GetAtt Listener.Arn
+
 
 
 
