@@ -54,18 +54,6 @@ Resources:
         PrivateSubnet1Cidr: !Ref PrivateSubnet1Cidr
         PrivateSubnet2Cidr: !Ref PrivateSubnet2Cidr
 
-
-  ALBStackSecondary:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstacksecondary.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        VpcId: !GetAtt NetworkStack.Outputs.VpcId
-        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
-        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
-        AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
-
   ComputeStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: SsmStack
@@ -79,6 +67,19 @@ Resources:
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
         AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
+
+  ALBStackSecondary:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstacksecondary.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        VpcId: !GetAtt NetworkStack.Outputs.VpcId
+        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
+        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlueArn
+        AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
+
         
   DatabaseStackSecondary:
     Type: AWS::CloudFormation::Stack
@@ -137,6 +138,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
