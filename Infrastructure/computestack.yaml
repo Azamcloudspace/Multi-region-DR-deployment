@@ -157,10 +157,18 @@ Outputs:
   TargetGroupGreen:
     Value: !Ref TargetGroupGreen
 
+  TargetGroupBlueArn:
+    Value: !GetAtt TargetGroupBlue.Arn
+
+  TargetGroupGreenArn:
+    Value: !GetAtt TargetGroupGreen.Arn
+
+
 
 
 
  
+
 
 
 
