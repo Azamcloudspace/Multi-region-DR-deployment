@@ -91,12 +91,13 @@ Outputs:
     Value: !GetAtt ALBSecondary.CanonicalHostedZoneID
 
   Listener: 
-    Value: !GetAtt Listener.Arn
+    Value: !Ref Listener
 
   SecondaryALBID:
     Value: !GetAtt ALBSecondary.LoadBalancerFullName
 
   
+
 
 
 
