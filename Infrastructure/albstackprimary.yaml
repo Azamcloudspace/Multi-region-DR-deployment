@@ -103,7 +103,8 @@ Outputs:
     Value: !GetAtt ALBPrimary.LoadBalancerFullName
 
   Listener:
-    Value: !GetAtt Listener.Arn
+    Value: !Ref Listener
+
 
 
 
