@@ -77,7 +77,7 @@ Resources:
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
         PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
         PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
-        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlueArn
+        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
 
         
@@ -138,6 +138,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
