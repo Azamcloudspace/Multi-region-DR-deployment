@@ -87,16 +87,17 @@ Outputs:
   SecondaryALBDNS:
     Value: !GetAtt ALBSecondary.DNSName
   
-  PrimaryALBZoneId:
+  SecondaryALBZoneId:
     Value: !GetAtt ALBSecondary.CanonicalHostedZoneID
 
   Listener: 
     Value: !Ref Listener
 
-  SecondaryALBID:
-    Value: !GetAtt ALBSecondary.LoadBalancerFullName
+  SecondaryALBName:
+    Value: !Ref ALBSecondary
 
   
+
 
 
 
