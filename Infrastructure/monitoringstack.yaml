@@ -6,7 +6,7 @@ Parameters:
     Type: String
   TargetMetricName:
     Type: String
-  PrimaryALBID:
+  PrimaryALBName:
     Type: String
   SNSAlertArn:
     Type: String
@@ -23,7 +23,7 @@ Resources:
       MetricName: !Ref TargetMetricName
       Dimensions:
         - Name: LoadBalancer
-          Value: !Ref PrimaryALBID
+          Value: !Ref PrimaryALBName
       Statistic: Average
       Period: 60
       EvaluationPeriods: 2
@@ -38,5 +38,6 @@ Resources:
 
   AlarmNameOut:
     Value: !Ref PrimaryHealthAlarm
+
 
 
