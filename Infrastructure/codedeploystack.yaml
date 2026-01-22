@@ -43,9 +43,7 @@ Resources:
       ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
       DeploymentStyle:
         DeploymentType: BLUE_GREEN
-        DeploymentOption: WITH_TRAFFIC_CONTROL
-      AutoScalingGroups:
-        - !Ref AutoScalingGroup
+        DeploymentOption: WITH_TRAFFIC_CONTR
       LoadBalancerInfo:
         TargetGroupPairInfoList:
           - ProdTrafficRoute:
@@ -55,18 +53,16 @@ Resources:
               - Name: !Ref TargetGroupBlue
               - Name: !Ref TargetGroupGreen
       BlueGreenDeploymentConfiguration:
+        GreenFleetProvisioningOption:
+          Action: COPY_AUTO_SCALING_GROUP
         TerminateBlueInstancesOnDeploymentSuccess:
           Action: TERMINATE
           TerminationWaitTimeInMinutes: 5
-        DeploymentReadyOption:
-          ActionOnTimeout: CONTINUE_DEPLOYMENT
-          WaitTimeInMinutes: 0
-        GreenFleetProvisioningOption:
-          Action: DISCOVER_EXISTING
 
 Outputs:
   CodeDeployApplication:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
