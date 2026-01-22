@@ -100,10 +100,11 @@ Outputs:
     Value: !GetAtt ALBPrimary.CanonicalHostedZoneID
 
   PrimaryALBID:
-    Value: !Ref ALBPrimary.LoadBalancerFullName
+    Value: !GetAtt ALBPrimary.LoadBalancerFullName
 
   Listener:
     Value: !Ref Listener
+
 
 
 
