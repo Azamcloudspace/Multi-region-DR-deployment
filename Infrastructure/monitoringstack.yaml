@@ -35,9 +35,11 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-PrimaryHealthAlarm"
-
+          
+Outputs:
   AlarmNameOut:
     Value: !Ref PrimaryHealthAlarm
+
 
 
 
