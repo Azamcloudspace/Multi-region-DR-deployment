@@ -132,7 +132,7 @@ Resources:
   CodeBuildStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuildstack.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuild.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         
@@ -147,6 +147,7 @@ Resources:
         CodeStarConnectionArn: !Ref CodeStarConnectionArn
         CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
         CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
+        CodeBuildProject: !GetAtt CodeBuildStack.Outputs.CodeBuildProjectName
 
   SnsStack:
     Type: AWS::CloudFormation::Stack
@@ -184,6 +185,7 @@ Resources:
  
 
         
+
 
 
 
