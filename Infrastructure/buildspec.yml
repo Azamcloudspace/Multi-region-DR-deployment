@@ -15,6 +15,7 @@ phases:
       - aws s3 cp Infrastructure/databasestackprimary.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/databasestacksecondary.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/codedeploystack.yaml s3://iac-bucket-azamcloud/
+      - aws s3 cp Infrastructure/codebuild.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/codepipelinestack.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/route53stack.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/monitoringstack.yaml s3://iac-bucket-azamcloud/
