@@ -129,6 +129,13 @@ Resources:
         AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
         AlbListenerArn: !GetAtt ALBStackPrimary.Outputs.Listener
 
+  CodeBuildStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuildstack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -177,6 +184,7 @@ Resources:
  
 
         
+
 
 
 
