@@ -18,6 +18,8 @@ Resources:
 
   AlbLogBucketPrimary:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    
     Properties:
       BucketName: !Sub "${AWS::AccountId}-alb-logs-primary"
       OwnershipControls:
@@ -104,6 +106,7 @@ Outputs:
 
   Listener:
     Value: !Ref Listener
+
 
 
 
