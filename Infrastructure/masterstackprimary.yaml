@@ -131,7 +131,6 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
-        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
         AlbListenerArn: !GetAtt ALBStackPrimary.Outputs.Listener
 
   CodeBuildStack:
@@ -196,6 +195,7 @@ Resources:
  
 
         
+
 
 
 
