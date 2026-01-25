@@ -127,7 +127,7 @@ Resources:
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
         AlbListenerArn: !GetAtt ALBStackPrimary.Outputs.Listener
-        AutoScalingGroups: !GetAtt ComputeStack.Outputs.AutoScalingGroupsName
+        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
 
   CodeBuildStack:
     Type: AWS::CloudFormation::Stack
@@ -185,6 +185,7 @@ Resources:
  
 
         
+
 
 
 
