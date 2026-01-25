@@ -102,7 +102,7 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
-        AlbListenerSecondary: !GetAtt ALBStackSecondary.Outputs.Listener
+        AlbListenerArn: !GetAtt ALBStackSecondary.Outputs.Listener
 
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
@@ -146,6 +146,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
