@@ -46,25 +46,25 @@ Resources:
         DeploymentOption: WITH_TRAFFIC_CONTROL
       DeploymentConfigName: CodeDeployDefault.AllAtOnce
       LoadBalancerInfo:
-        TargetGroupPairInfoList:
-          - ProdTrafficRoute:
-              ListenerArns:
-                - !Ref AlbListenerArn
-            TargetGroups:
-              - Name: !Ref TargetGroupBlue
-              - Name: !Ref TargetGroupGreen
+        TargetGroupInfoList:
+          TargetGroups:
+            - Name: !Ref TargetGroupBlue
+            - Name: !Ref TargetGroupGreen
       BlueGreenDeploymentConfiguration:
         GreenFleetProvisioningOption:
           Action: COPY_AUTO_SCALING_GROUP
         TerminateBlueInstancesOnDeploymentSuccess:
           Action: TERMINATE
           TerminationWaitTimeInMinutes: 5
+        DeploymentReadyOption:
+          ActionOnTimeout: CONTINUE_DEPLOYMENT
 
 Outputs:
   CodeDeployApplication:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
 
 
