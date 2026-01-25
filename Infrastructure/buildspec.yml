@@ -23,7 +23,7 @@ phases:
       - aws s3 cp Infrastructure/secondarybucketstack.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/snsstack.yaml s3://iac-bucket-azamcloud/
       - aws s3 cp Infrastructure/ssmstack.yaml s3://iac-bucket-azamcloud/
-      - aws cloudformation update --template-file Infrastructure/masterstackprimary.yaml --stack-name Multi-RegionDR-stack-East --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://Infrastructure/prod-params-primary.json --region us-east-1
+      - aws cloudformation update-stack --template-file Infrastructure/masterstackprimary.yaml --stack-name Multi-RegionDR-stack-East --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://Infrastructure/prod-params-primary.json --region us-east-1
       - value=$(aws ssm get-parameter --name "/prod/db/primary/arn" --region us-east-1 --query 'Parameter.Value' --output text)
       - aws ssm put-parameter --name "/prod/db/primary/arn" --value "$value" --type String --overwrite --region us-west-1
       - aws cloudformation deploy --template-file Infrastructure/masterstacksecondary.yaml --stack-name Multi-RegionDR-Stack-west --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://Infrastructure/prod-params-secondary.json --region us-west-1
