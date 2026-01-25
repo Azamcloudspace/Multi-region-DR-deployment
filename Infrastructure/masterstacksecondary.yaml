@@ -98,6 +98,7 @@ Resources:
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
         AlbListenerArn: !GetAtt ALBStackSecondary.Outputs.Listener
+        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
 
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
@@ -137,6 +138,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
