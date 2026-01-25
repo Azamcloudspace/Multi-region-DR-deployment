@@ -102,7 +102,6 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
         TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
-        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
         AlbListenerSecondary: !GetAtt ALBStackSecondary.Outputs.Listener
 
   CodepipelineStack:
@@ -147,6 +146,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
