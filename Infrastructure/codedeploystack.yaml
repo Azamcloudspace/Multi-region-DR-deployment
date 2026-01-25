@@ -41,6 +41,8 @@ Resources:
     Properties:
       ApplicationName: !Ref CodeDeployApplication
       ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
+      AutoScalingGroups:
+        - !Ref AutoScalingGroup
       DeploymentStyle:
         DeploymentType: BLUE_GREEN
         DeploymentOption: WITH_TRAFFIC_CONTROL
@@ -63,6 +65,7 @@ Outputs:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
 
 
