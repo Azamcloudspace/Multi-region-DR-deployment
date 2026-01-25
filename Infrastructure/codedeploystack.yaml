@@ -47,9 +47,8 @@ Resources:
       DeploymentConfigName: CodeDeployDefault.AllAtOnce
       LoadBalancerInfo:
         TargetGroupInfoList:
-          TargetGroups:
-            - Name: !Ref TargetGroupBlue
-            - Name: !Ref TargetGroupGreen
+          - Name: !Ref TargetGroupBlue
+          - Name: !Ref TargetGroupGreen
       BlueGreenDeploymentConfiguration:
         GreenFleetProvisioningOption:
           Action: COPY_AUTO_SCALING_GROUP
@@ -64,6 +63,7 @@ Outputs:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
 
 
