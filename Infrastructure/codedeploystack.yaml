@@ -9,8 +9,6 @@ Parameters:
     Type: String
   AlbListenerArn:
     Type: String
-  AutoScalingGroup:
-    Type: String
 
 Resources:
 
@@ -41,8 +39,6 @@ Resources:
     Properties:
       ApplicationName: !Ref CodeDeployApplication
       ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
-      AutoScalingGroups:
-        - !Ref AutoScalingGroup
       DeploymentStyle:
         DeploymentType: BLUE_GREEN
         DeploymentOption: WITH_TRAFFIC_CONTROL
@@ -50,7 +46,6 @@ Resources:
       LoadBalancerInfo:
         TargetGroupInfoList:
           - Name: !Ref TargetGroupBlue
-          - Name: !Ref TargetGroupGreen
       BlueGreenDeploymentConfiguration:
         GreenFleetProvisioningOption:
           Action: COPY_AUTO_SCALING_GROUP
@@ -65,6 +60,7 @@ Outputs:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
 
 
