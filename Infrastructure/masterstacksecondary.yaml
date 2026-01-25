@@ -44,6 +44,7 @@ Parameters:
 Resources:
   NetworkStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/networkstack.yaml
       Parameters:
@@ -56,6 +57,7 @@ Resources:
 
   ComputeStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     DependsOn: SsmStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/computestack.yaml
@@ -70,6 +72,7 @@ Resources:
 
   ALBStackSecondary:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/albstacksecondary.yaml
       Parameters:
@@ -83,6 +86,7 @@ Resources:
         
   DatabaseStackSecondary:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/databasestacksecondary.yaml
       Parameters:
@@ -91,6 +95,7 @@ Resources:
 
   CodeDeployStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codedeploystack.yaml
       Parameters:
@@ -102,6 +107,7 @@ Resources:
 
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
       Parameters:
@@ -114,6 +120,7 @@ Resources:
 
   SecondaryBucketStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/secondarybucketstack.yaml
       Parameters:
@@ -121,6 +128,7 @@ Resources:
 
   SsmStack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/ssmstack.yaml
       Parameters:
@@ -128,6 +136,7 @@ Resources:
 
   Route53Stack:
     Type: AWS::CloudFormation::Stack
+    DeletionPolicy: Retain
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53stack.yaml
       Parameters:
@@ -138,6 +147,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
