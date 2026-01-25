@@ -7,8 +7,6 @@ Parameters:
     Type: String
   TargetGroupGreen:
     Type: String
-  AlbListenerArn:
-    Type: String
 
 Resources:
 
@@ -60,6 +58,7 @@ Outputs:
     Value: !Ref CodeDeployApplication
   CodeDeployDeploymentGroup:
     Value: !Ref CodeDeployDeploymentGroup
+
 
 
 
