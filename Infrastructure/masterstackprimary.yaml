@@ -141,8 +141,8 @@ Resources:
         GitHubRepo: !Ref GitHubRepo
         GitHubOwner: !Ref GitHubOwner
         CodeStarConnectionArn: !Ref CodeStarConnectionArn
-        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
-        CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
+        #CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
+        #CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
         CodeBuildProject: !GetAtt CodeBuildStack.Outputs.CodeBuildProjectName
 
   SnsStack:
@@ -179,3 +179,4 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
