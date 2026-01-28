@@ -18,11 +18,11 @@ Parameters:
   CodeStarConnectionArn:
     Type: String
 
-  CodeDeployApplication:
-    Type: String
+#  CodeDeployApplication:
+#    Type: String
 
-  CodeDeploymentGroup:
-    Type: String
+#  CodeDeploymentGroup:
+#    Type: String
 
   CodeBuildProject:
     Type: String
@@ -147,6 +147,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
