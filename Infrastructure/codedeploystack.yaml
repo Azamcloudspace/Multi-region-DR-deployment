@@ -1,19 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
-
 Parameters:
   EnvironmentName:
     Type: String
-  TargetGroupBlue:
-    Type: String
-  TargetGroupGreen:
-    Type: String
-  AlbListenerArn:
-    Type: String
-  AutoScalingGroup:
-    Type: String
-
 Resources:
-
   CodeDeployServiceRole:
     Type: AWS::IAM::Role
     Properties:
@@ -29,50 +18,12 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
-
   CodeDeployApplication:
     Type: AWS::CodeDeploy::Application
     Properties:
       ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
       ComputePlatform: Server
 
-  CodeDeployDeploymentGroup:
-    Type: AWS::CodeDeploy::DeploymentGroup
-    Properties:
-      ApplicationName: !Ref CodeDeployApplication
-      DeploymentGroupName: !Sub "${EnvironmentName}-dg"
-      ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
-      DeploymentStyle:
-        DeploymentType: BLUE_GREEN
-        DeploymentOption: WITH_TRAFFIC_CONTROL
-      DeploymentConfigName: CodeDeployDefault.AllAtOnce
-      AutoScalingGroups:
-        - !Ref AutoScalingGroup
-      BlueGreenDeploymentConfiguration:
-        DeploymentReadyOption:
-          ActionOnTimeout: CONTINUE_DEPLOYMENT
-          WaitTimeInMinutes: 0
-        GreenFleetProvisioningOption:
-          Action: COPY_AUTO_SCALING_GROUP
-        TerminateBlueInstancesOnDeploymentSuccess:
-          Action: TERMINATE
-          TerminationWaitTimeInMinutes: 5
-
 Outputs:
   CodeDeployApplication:
     Value: !Ref CodeDeployApplication
-  CodeDeployDeploymentGroup:
-    Value: !Ref CodeDeployDeploymentGroup
-
-
-
-
-
-
-
-
-
-
-
-
-
