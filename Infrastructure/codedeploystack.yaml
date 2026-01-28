@@ -2,6 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   EnvironmentName:
     Type: String
+    
 Resources:
   CodeDeployServiceRole:
     Type: AWS::IAM::Role
@@ -27,3 +28,4 @@ Resources:
 Outputs:
   CodeDeployApplication:
     Value: !Ref CodeDeployApplication
+
