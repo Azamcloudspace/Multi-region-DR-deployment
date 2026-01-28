@@ -21,7 +21,7 @@ Parameters:
   CodeDeployApplication:
     Type: String
 
-  CodeDeployDeploymentGroup:
+  CodeDeploymentGroup:
     Type: String
 
   CodeBuildProject:
@@ -121,31 +121,32 @@ Resources:
               Configuration:
                 ProjectName: !Ref CodeBuildProject
 
-        - Name: Deploy
-          Actions:
-            - Name: CodeDeploy
-              ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Provider: CodeDeploy
-                Version: "1"
-              InputArtifacts:
-                - Name: SourceOutput
-              Configuration:
-                ApplicationName: !Ref CodeDeployApplication
-                DeploymentGroupName: !Ref CodeDeployDeploymentGroup
+ #       - Name: Deploy
+ #         Actions:
+ #           - Name: CodeDeploy
+ #             ActionTypeId:
+ #               Category: Deploy
+ #               Owner: AWS
+ #               Provider: CodeDeploy
+ #               Version: "1"
+ #             InputArtifacts:
+ #               - Name: SourceOutput
+ #             Configuration:
+ #               ApplicationName: !Ref CodeDeployApplication
+ #               DeploymentGroupName: !Ref CodeDeploymentGroup 
 
-      LogsConfig:
-        CloudWatchLogs:
-          Status: ENABLED
-          GroupName: /aws/codepipeline/MultiRegionDR
+ #     LogsConfig:
+ #       CloudWatchLogs:
+ #         Status: ENABLED
+ #         GroupName: /aws/codepipeline/MultiRegionDR
 
-      Tags:
-        - Key: Name
-          Value: !Sub "${EnvironmentName}-Pipeline"
+ #     Tags:
+ #       - Key: Name
+ #         Value: !Sub "${EnvironmentName}-Pipeline"
 
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
