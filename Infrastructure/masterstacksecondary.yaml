@@ -95,22 +95,17 @@ Resources:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codedeploystack.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
-        TargetGroupBlue: !GetAtt ComputeStack.Outputs.TargetGroupBlue
-        TargetGroupGreen: !GetAtt ComputeStack.Outputs.TargetGroupGreen
-        AlbListenerArn: !GetAtt ALBStackSecondary.Outputs.Listener
-        AutoScalingGroup: !GetAtt ComputeStack.Outputs.AutoScalingGroupName
 
-  CodepipelineStack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        GitHubRepo: !Ref GitHubRepo
-        GitHubOwner: !Ref GitHubOwner
-        CodeStarConnectionArn: !Ref CodeStarConnectionArn
-        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
-        CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
+#  CodepipelineStack:
+#    Type: AWS::CloudFormation::Stack
+#    Properties:
+#      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
+#      Parameters:
+#        EnvironmentName: !Ref EnvironmentName
+#        GitHubRepo: !Ref GitHubRepo
+#        GitHubOwner: !Ref GitHubOwner
+#        CodeStarConnectionArn: !Ref CodeStarConnectionArn
+#        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
 
   SecondaryBucketStack:
     Type: AWS::CloudFormation::Stack
@@ -138,6 +133,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
