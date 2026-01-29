@@ -105,7 +105,8 @@ Resources:
         GitHubRepo: !Ref GitHubRepo
         GitHubOwner: !Ref GitHubOwner
         CodeStarConnectionArn: !Ref CodeStarConnectionArn
-#        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
+        #CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
+        #CodeDeployDeploymentGroup: !GetAtt CodeDeployStack.Outputs.CodeDeployDeploymentGroup
 
   SecondaryBucketStack:
     Type: AWS::CloudFormation::Stack
@@ -133,6 +134,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
