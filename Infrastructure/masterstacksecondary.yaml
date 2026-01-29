@@ -96,15 +96,15 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
-#  CodepipelineStack:
-#    Type: AWS::CloudFormation::Stack
-#    Properties:
-#      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
-#      Parameters:
-#        EnvironmentName: !Ref EnvironmentName
-#        GitHubRepo: !Ref GitHubRepo
-#        GitHubOwner: !Ref GitHubOwner
-#        CodeStarConnectionArn: !Ref CodeStarConnectionArn
+  CodepipelineStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        GitHubRepo: !Ref GitHubRepo
+        GitHubOwner: !Ref GitHubOwner
+        CodeStarConnectionArn: !Ref CodeStarConnectionArn
 #        CodeDeployApplication: !GetAtt CodeDeployStack.Outputs.CodeDeployApplication
 
   SecondaryBucketStack:
@@ -133,6 +133,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
