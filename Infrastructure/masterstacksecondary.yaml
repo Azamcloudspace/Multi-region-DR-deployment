@@ -23,8 +23,6 @@ Parameters:
     Type: String
   CodeStarConnectionArn:
     Type: String
-  GitHubToken:
-    Type: String
     NoEcho: true
   SourceDBArn:
     Type: String
@@ -124,6 +122,7 @@ Resources:
 
   Route53Stack:
     Type: AWS::CloudFormation::Stack
+    DependsOn: ALBStackSecondary
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/route53stack.yaml
       Parameters:
@@ -134,6 +133,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
