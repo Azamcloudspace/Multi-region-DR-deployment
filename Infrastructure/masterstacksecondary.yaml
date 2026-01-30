@@ -96,6 +96,13 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
+  CodeBuildStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuild.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+
   CodepipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -136,6 +143,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
