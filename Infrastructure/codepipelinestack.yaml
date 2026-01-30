@@ -29,6 +29,11 @@ Parameters:
 
 Resources:
 
+  ArtifactStoreBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-artifacts"
+
   CodePipelineRole:
     Type: AWS::IAM::Role
     Properties:
@@ -142,6 +147,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
