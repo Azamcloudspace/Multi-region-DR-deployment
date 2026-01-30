@@ -132,7 +132,7 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         
-  CodepipelineStack:
+  CodepipelineStackPrimary:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
@@ -179,4 +179,5 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
 
