@@ -103,10 +103,10 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
-  CodepipelineStack:
+  CodepipelineStackSecondary:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack-secondary.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         GitHubRepo: !Ref GitHubRepo
@@ -143,6 +143,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
