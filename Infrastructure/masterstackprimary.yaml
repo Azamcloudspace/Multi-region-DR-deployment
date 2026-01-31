@@ -87,6 +87,7 @@ Resources:
   ComputeStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: SsmStack
+    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/computestack.yaml
       Parameters:
@@ -129,6 +130,7 @@ Resources:
 
   CodeDeployStack:
     Type: AWS::CloudFormation::Stack
+    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codedeploystack.yaml
       Parameters:
@@ -136,6 +138,7 @@ Resources:
 
   CodeBuildStack:
     Type: AWS::CloudFormation::Stack
+    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codebuild.yaml
       Parameters:
@@ -143,6 +146,7 @@ Resources:
         
   CodepipelineStackPrimary:
     Type: AWS::CloudFormation::Stack
+    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
       Parameters:
@@ -176,6 +180,7 @@ Resources:
 
   PrimaryBucketStack:
     Type: AWS::CloudFormation::Stack
+    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/primarybucketstack.yaml
       Parameters:
@@ -188,6 +193,7 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
 
 
 
