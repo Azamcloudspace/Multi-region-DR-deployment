@@ -41,7 +41,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Sub "${EnvironmentName}-tests"
-      ServiceRole: !GetAtt CodeBuildRole.Arn
+      ServiceRole: arn:aws:iam::975050225555:role/cloudformationrole
       Artifacts:
         Type: CODEPIPELINE
       Environment:
@@ -57,3 +57,4 @@ Outputs:
     Value: !Ref CodeBuildProject
   CodeBuildRoleArn:
     Value: !GetAtt CodeBuildRole.Arn
+
