@@ -10,7 +10,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Sub "${EnvironmentName}-tests"
-      ServiceRole: !Sub "arn:aws:iam::975050225555:role/{EnvironmentName}-codebuild-role"
+      ServiceRole: !Sub "arn:aws:iam::${AWS::AccountId}:role/${EnvironmentName}-codebuild-role"
       Artifacts:
         Type: CODEPIPELINE
       Environment:
@@ -24,5 +24,6 @@ Resources:
 Outputs:
   CodeBuildProjectName:
     Value: !Ref CodeBuildProject
+
 
 
