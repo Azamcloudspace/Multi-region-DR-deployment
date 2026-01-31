@@ -4,21 +4,7 @@ Parameters:
     Type: String
     
 Resources:
-  CodeDeployServiceRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "${EnvironmentName}-CodeDeployRole"
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - codedeploy.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+
   CodeDeployApplication:
     Type: AWS::CodeDeploy::Application
     Properties:
@@ -30,6 +16,7 @@ Outputs:
     Value: !Ref CodeDeployApplication
   CodeDeloymentGroupName:
     Value: !Sub "${EnvironmentName}-dg"
+
 
 
 
