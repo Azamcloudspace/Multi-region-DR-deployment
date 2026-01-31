@@ -63,6 +63,15 @@ Parameters:
 
     
 Resources:
+
+  RolesStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/roles.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+
+  
   NetworkStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -179,5 +188,6 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
 
 
