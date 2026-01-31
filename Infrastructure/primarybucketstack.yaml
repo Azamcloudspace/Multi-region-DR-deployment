@@ -24,8 +24,7 @@ Resources:
 Outputs:
   PrimaryBucketName:
     Value: !Ref PrimaryBucket
-  ReplicationRoleArn:
-    Value: !GetAtt ReplicationRole.Arn
+
 
 
 
