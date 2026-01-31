@@ -14,9 +14,4 @@ Resources:
 Outputs:
   CodeDeployApplication:
     Value: !Ref CodeDeployApplication
-  CodeDeloymentGroupName:
-    Value: !Sub "${EnvironmentName}-dg"
-
-
-
 
