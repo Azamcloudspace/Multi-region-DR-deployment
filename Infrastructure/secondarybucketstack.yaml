@@ -23,34 +23,9 @@ Resources:
         - Key: Name
           Value: !Sub "${EnvironmentName}-secondary-dr-bucket"
 
-  ReplicationRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "${EnvironmentName}-s3-replication-role-Secondary"
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: s3.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: s3-replication-policy-secondary
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - s3:ReplicateObject
-                  - s3:ReplicateDelete
-                  - s3:ReplicateTags
-                Resource: !Sub "arn:aws:s3:::${EnvironmentName}-secondary-dr-bucket-${AWS::Region}/*"
-
-
 Outputs:
   SecondaryBucketName:
     Value: !Ref SecondaryBucket
-  SecondaryBucketArn:
-    Value: !GetAtt SecondaryBucket.Arn
+
 
 
