@@ -158,3 +158,7 @@ Resources:
                   - s3:ReplicateTags
                 Resource: arn:aws:s3:::dev-secondary-dr-bucket-us-west-1/*
 
+Outputs: 
+  CodeBuildRoleArn:
+    
+
