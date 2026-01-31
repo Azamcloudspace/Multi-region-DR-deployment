@@ -33,7 +33,7 @@ Resources:
           - Sid: AllowReplicationRoleWrite
             Effect: Allow
             Principal:
-              AWS: !Ref S3ReplicationRole
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:role/${EnvironmentName}-s3-replication-role"
             Action:
               - s3:ReplicateObject
               - s3:ReplicateDelete
@@ -45,6 +45,7 @@ Resources:
 Outputs:
   SecondaryBucketName:
     Value: !Ref SecondaryBucket
+
 
 
 
