@@ -20,39 +20,12 @@ Resources:
         - Key: Name
           Value: !Sub "${EnvironmentName}-primary-dr-bucket"
 
-  ReplicationRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "${EnvironmentName}-s3-replication-role"
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: s3.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: s3-replication-policy
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - s3:GetReplicationConfiguration
-                  - s3:ListBucket
-                Resource: !Sub "arn:aws:s3:::${EnvironmentName}-primary-dr-bucket-${AWS::Region}"
-              - Effect: Allow
-                Action:
-                  - s3:GetObjectVersion
-                  - s3:GetObjectVersionAcl
-                  - s3:GetObjectVersionTagging
-                Resource: !Sub "arn:aws:s3:::${EnvironmentName}-primary-dr-bucket-${AWS::Region}/*"
-
 
 Outputs:
   PrimaryBucketName:
     Value: !Ref PrimaryBucket
   ReplicationRoleArn:
     Value: !GetAtt ReplicationRole.Arn
+
 
 
