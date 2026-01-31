@@ -1,5 +1,5 @@
 {
-  "Role": "arn:aws:iam::975050225555:role/prod-s3-replication-role",
+  "Role": "arn:aws:iam::975050225555:role/dev-s3-replication-role",
   "Rules": [
     {
       "ID": "CRR",
@@ -14,4 +14,5 @@
     }
   ]
 }
+
 
