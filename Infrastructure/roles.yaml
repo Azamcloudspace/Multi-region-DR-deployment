@@ -52,11 +52,6 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
-  CodeDeployApplication:
-    Type: AWS::CodeDeploy::Application
-    Properties:
-      ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
-      ComputePlatform: Server
 
   CodePipelineRole:
     Type: AWS::IAM::Role
@@ -160,5 +155,22 @@ Resources:
 
 Outputs: 
   CodeBuildRoleArn:
+    Value: !GetAtt CodeBuildRole.Arn
+  
+  CodeDeployServiceRoleArn:
+    Value: !GetAtt CodeDeployServiceRole.Arn
+   
+  CodePipelineRoleArn:
+    Value: !GetAtt CodePipelineRole.Arn
+
+  InstanceRoleArn:
+    Value: !GetAtt InstanceRole.Arn
+
+  ReplicationRoleArn:
+    Value: !GetAtt ReplicationRole.Arn
+    
+
+  
+    
     
 
