@@ -42,6 +42,7 @@ Parameters:
     Type: String
 
 Resources:
+
   NetworkStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -143,6 +144,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
