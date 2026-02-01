@@ -70,8 +70,6 @@ Resources:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/roles.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
-        ArtifactBucketStore: !GetAtt 
-
   
   NetworkStack:
     Type: AWS::CloudFormation::Stack
@@ -194,6 +192,7 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
 
 
 
