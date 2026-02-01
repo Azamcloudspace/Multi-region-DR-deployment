@@ -145,7 +145,6 @@ Resources:
         
   CodepipelineStackPrimary:
     Type: AWS::CloudFormation::Stack
-    DependsOn: RolesStack
     Properties:
       TemplateURL: https://s3.amazonaws.com/iac-bucket-azamcloud/codepipelinestack.yaml
       Parameters:
@@ -192,6 +191,7 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
  
+
 
 
 
