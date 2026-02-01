@@ -9,10 +9,11 @@
         "Status": "Enabled"
       },
       "Destination": {
-        "Bucket": "arn:aws:s3:::prod-secondary-dr-bucket-us-west-1"
+        "Bucket": "arn:aws:s3:::dev-secondary-dr-bucket-us-west-1"
       }
     }
   ]
 }
+
 
 
