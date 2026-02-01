@@ -29,7 +29,7 @@
   },
   {
     "ParameterKey": "InstanceAmiId",
-    "ParameterValue": "ami-0fa3fe0fa7920f68e"
+    "ParameterValue": "ami-0993d3759749c153c"
   },
   {
     "ParameterKey": "DBInstanceClassReplica",
@@ -76,4 +76,5 @@
     "ParameterValue": "/myapp/secondary/dbarn"
   }
 ]
+
 
