@@ -64,8 +64,8 @@ Resources:
         EnvironmentName: !Ref EnvironmentName
         InstanceAmiId: !Ref InstanceAmiId
         InstanceType: !Ref InstanceType
-        PublicSubnet1: !GetAtt NetworkStack.Outputs.PublicSubnet1
-        PublicSubnet2: !GetAtt NetworkStack.Outputs.PublicSubnet2
+        PrivateSubnet1: !GetAtt NetworkStack.Outputs.PrivateSubnet1
+        PrivateSubnet2: !GetAtt NetworkStack.Outputs.PrivateSubnet2
         VpcId: !GetAtt NetworkStack.Outputs.VpcId
         AlbSecurityGroup: !GetAtt NetworkStack.Outputs.AlbSecurityGroup
 
@@ -144,6 +144,7 @@ Resources:
         PrimaryALBDNS: !Ref PrimaryALBDNS
         SecondaryALBDNS: !Ref SecondaryALBDNS
         HostedZoneId: !Ref HostedZoneId
+
 
 
 
