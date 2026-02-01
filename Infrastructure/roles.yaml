@@ -4,6 +4,13 @@ Parameters:
   EnvironmentName:
     Type: String
 
+  ArtifactStoreBucket:
+    Type: String
+
+  CodeStarConnectionArn:
+    Type: String
+
+
 Resources:
   
   CodeBuildRole:
