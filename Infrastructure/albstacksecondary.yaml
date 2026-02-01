@@ -28,7 +28,7 @@ Resources:
         BlockPublicPolicy: false
         IgnorePublicAcls: true
         RestrictPublicBuckets: false
-        
+
   AlbLogBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -36,11 +36,19 @@ Resources:
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
-          - Effect: Allow
+          - Sid: ALBLogDeliveryWrite
+            Effect: Allow
             Principal:
-              Service: elasticloadbalancing.amazonaws.com
+              AWS: arn:aws:iam::027434742980:root
             Action: s3:PutObject
-            Resource: !Sub "arn:aws:s3:::${AWS::AccountId}-alb-logs-secondary/*"
+            Resource: !Sub "arn:aws:s3:::${AlbLogBucketSecondary}/AWSLogs/${AWS::AccountId}/*"
+         
+          - Sid: ALBLogDeliveryAclCheck
+            Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::027434742980:root
+            Action: s3:GetBucketAcl
+            Resource: !Sub "arn:aws:s3:::${AlbLogBucketSecondary}"
 
   ALBSecondary:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -97,6 +105,7 @@ Outputs:
     Value: !Ref ALBSecondary
 
   
+
 
 
 
