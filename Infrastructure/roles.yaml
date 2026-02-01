@@ -4,13 +4,6 @@ Parameters:
   EnvironmentName:
     Type: String
 
-  ArtifactStoreBucket:
-    Type: String
-
-  CodeStarConnectionArn:
-    Type: String
-
-
 Resources:
   
   CodeBuildRole:
@@ -118,9 +111,6 @@ Outputs:
   
   CodeDeployServiceRoleArn:
     Value: !GetAtt CodeDeployServiceRole.Arn
-   
-  CodePipelineRoleArn:
-    Value: !GetAtt CodePipelineRole.Arn
 
   InstanceRoleArn:
     Value: !GetAtt InstanceRole.Arn
