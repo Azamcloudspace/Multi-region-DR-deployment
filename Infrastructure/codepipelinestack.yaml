@@ -122,32 +122,33 @@ Resources:
               Configuration:
                 ProjectName: !Ref CodeBuildProject
 
- #       - Name: Deploy
- #         Actions:
- #           - Name: CodeDeploy
- #             ActionTypeId:
- #               Category: Deploy
- #               Owner: AWS
- #               Provider: CodeDeploy
- #               Version: "1"
- #             InputArtifacts:
- #               - Name: SourceOutput
- #             Configuration:
- #               ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
- #               DeploymentGroupName: !!Sub "${EnvironmentName}-dg"
+        - Name: Deploy
+          Actions:
+            - Name: CodeDeploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CodeDeploy
+                Version: "1"
+              InputArtifacts:
+                - Name: SourceOutput
+              Configuration:
+                ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
+                DeploymentGroupName: !!Sub "${EnvironmentName}-dg"
 
- #     LogsConfig:
- #       CloudWatchLogs:
- #         Status: ENABLED
- #         GroupName: /aws/codepipeline/MultiRegionDR
+      LogsConfig:
+        CloudWatchLogs:
+          Status: ENABLED
+          GroupName: /aws/codepipeline/MultiRegionDR
 
- #     Tags:
- #       - Key: Name
- #         Value: !Sub "${EnvironmentName}-Pipeline"
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-Pipeline"
 
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
