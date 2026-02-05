@@ -10,7 +10,7 @@ phases:
           --deployment-group-name dev-dg \
           --service-role-arn arn:aws:iam::975050225555:role/dev-CodeDeployRole \
           --deployment-style deploymentType=BLUE_GREEN,deploymentOption=WITH_TRAFFIC_CONTROL \
-          --auto-scaling-groups Dev-Multi-RegionDR-Stack-West-ComputeStack-1JYRFRPCW162R-AutoScalingGroup-amT5RVSD2ya8 \
+          --auto-scaling-groups Dev-Multi-RegionDR-Stack-East-ComputeStack-2N1P7OTCGNKT-AutoScalingGroup-rsc1T4crvqHq \
           --load-balancer-info 'targetGroupInfoList=[{name=dev-tg-blue}]' \
           --blue-green-deployment-configuration '{"terminateBlueInstancesOnDeploymentSuccess":{"action":"TERMINATE","terminationWaitTimeInMinutes":1},"deploymentReadyOption":{"actionOnTimeout":"CONTINUE_DEPLOYMENT"},"greenFleetProvisioningOption":{"action":"COPY_AUTO_SCALING_GROUP"}}' \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
