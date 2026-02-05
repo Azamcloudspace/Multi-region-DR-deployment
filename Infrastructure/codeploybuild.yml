@@ -2,12 +2,22 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.11
+    commands:
+      - echo "Installing dependencies..."
+
+  pre_build:
+    commands:
+      - echo "Pre-build phase"
 
   build:
     commands:
-      - aws deploy create-deployment-group \
+      - echo "Build phase"
+
+  post_build:
+    commands:
+      - echo "Creating CodeDeploy deployment group..."
+      - |
+        aws deploy create-deployment-group \
           --application-name dev-CodeDeployApp \
           --deployment-group-name dev-dg \
           --service-role-arn arn:aws:iam::975050225555:role/dev-CodeDeployRole \
@@ -15,8 +25,5 @@ phases:
           --auto-scaling-groups Dev-Multi-RegionDR-Stack-West-ComputeStack-1JYRFRPCW162R-AutoScalingGroup-amT5RVSD2ya8 \
           --load-balancer-info targetGroupInfoList=[{name=dev-tg-blue}] \
           --blue-green-deployment-configuration terminateBlueInstancesOnDeploymentSuccess={action=TERMINATE,terminationWaitTimeInMinutes=1},deploymentReadyOption={actionOnTimeout=CONTINUE_DEPLOYMENT},greenFleetProvisioningOption={action=COPY_AUTO_SCALING_GROUP} \
-          --deployment-config-name CodeDeployDefault.AllAtOnce
-
-artifacts:
-  files:
-    - '**/*'
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --region us-west-1
