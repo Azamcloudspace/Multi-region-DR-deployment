@@ -133,8 +133,8 @@ Resources:
  #             InputArtifacts:
  #               - Name: SourceOutput
  #             Configuration:
- #               ApplicationName: !Ref CodeDeployApplication
- #               DeploymentGroupName: !Ref CodeDeploymentGroup 
+ #               ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
+ #               DeploymentGroupName: !Sub "${EnvironmentName}-dg"
 
  #     LogsConfig:
  #       CloudWatchLogs:
@@ -148,5 +148,6 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
