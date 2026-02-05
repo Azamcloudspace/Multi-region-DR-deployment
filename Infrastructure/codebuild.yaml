@@ -19,11 +19,17 @@ Resources:
         Type: LINUX_CONTAINER
       Source:
         Type: CODEPIPELINE
+        BuildSpec: buildspec-test.yml
       TimeoutInMinutes: 10
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-test-project"
+
 
 Outputs:
   CodeBuildProjectName:
     Value: !Ref CodeBuildProject
+
 
 
 
