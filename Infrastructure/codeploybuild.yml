@@ -14,4 +14,4 @@ phases:
           --load-balancer-info 'targetGroupInfoList=[{name=dev-tg-blue}]' \
           --blue-green-deployment-configuration '{"terminateBlueInstancesOnDeploymentSuccess":{"action":"TERMINATE","terminationWaitTimeInMinutes":1},"deploymentReadyOption":{"actionOnTimeout":"CONTINUE_DEPLOYMENT"},"greenFleetProvisioningOption":{"action":"COPY_AUTO_SCALING_GROUP"}}' \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --region us-west-1
+          --region us-east-1
