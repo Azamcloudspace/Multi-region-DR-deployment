@@ -4,6 +4,7 @@ version: 0.2
 
 env:
   variables:
+    ENVIRONMENT: "dev"
     TEST_RESULTS_DIR: "test-results"
     COVERAGE_DIR: "coverage"
 
@@ -34,7 +35,7 @@ phases:
       # HTML Validation Tests
       - echo "Validating HTML structure..."
       - |
-        HTML_FILE="app/index.html"  # ← CHANGE THIS to your actual path
+        HTML_FILE="app/index.html"  
         
         if [ -f "$HTML_FILE" ]; then
           echo "✓ $HTML_FILE exists"
@@ -58,7 +59,7 @@ phases:
       # Check appspec.yml
       - echo "Validating appspec.yml..."
       - |
-        APPSPEC_FILE="appspec.yml"  # ← CHANGE THIS if in different location
+        APPSPEC_FILE="appspec.yml" 
         
         if [ -f "$APPSPEC_FILE" ]; then
           echo "✓ $APPSPEC_FILE exists"
@@ -80,7 +81,7 @@ phases:
       # Check deployment scripts
       - echo "Validating deployment scripts..."
       - |
-        SCRIPTS_DIR="scripts"  # ← CHANGE THIS if scripts are elsewhere
+        SCRIPTS_DIR="app/scripts"  # ← CHANGE THIS if scripts are elsewhere
         SCRIPT_ERRORS=0
         
         if [ -f "$SCRIPTS_DIR/backup_blue.sh" ]; then
@@ -131,17 +132,6 @@ phases:
         else
           echo "✓ No hardcoded credentials detected"
         fi
-      
-      # File permissions check
-      - echo "Checking script permissions..."
-      - |
-        for script in scripts/*.sh; do
-          if [ -x "$script" ]; then
-            echo "✓ $script is executable"
-          else
-            echo "⚠️  Warning: $script is not executable (will be fixed during deployment)"
-          fi
-        done
       
       # Generate test report
       - echo "Generating test report..."
