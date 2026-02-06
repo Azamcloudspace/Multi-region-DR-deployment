@@ -82,6 +82,12 @@ Resources:
                   - logs:PutLogEvents
                 Resource: "*"
 
+              - Effect: Allow
+                Action:
+                  - codebuild:StartBuild
+                  - codebuild:BatchGetBuilds
+                  - codebuild:StopBuild
+                Resource: "*"
 
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -144,6 +150,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
