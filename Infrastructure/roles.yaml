@@ -61,42 +61,7 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
-      
-      Policies:
-        - PolicyName: CodeDeployBlueGreenAutoScalingPolicy
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - autoscaling:CompleteLifecycleAction
-                  - autoscaling:CreateAutoScalingGroup
-                  - autoscaling:CreateLaunchConfiguration
-                  - autoscaling:CreateOrUpdateTags
-                  - autoscaling:DeleteAutoScalingGroup
-                  - autoscaling:DeleteLaunchConfiguration
-                  - autoscaling:DescribeAutoScalingGroups
-                  - autoscaling:DescribeLaunchConfigurations
-                  - autoscaling:DescribeScalingActivities
-                  - autoscaling:DetachLoadBalancerTargetGroups
-                  - autoscaling:AttachLoadBalancerTargetGroups
-                  - autoscaling:PutLifecycleHook
-                  - autoscaling:UpdateAutoScalingGroup
-                Resource: "*"
-
-              - Effect: Allow
-                Action:
-                  - ec2:DescribeInstances
-                  - ec2:DescribeInstanceStatus
-                  - ec2:DescribeTags
-                Resource: "*"
-
-              - Effect: Allow
-                Action:
-                  - elasticloadbalancing:DescribeTargetGroups
-                  - elasticloadbalancing:DescribeTargetHealth
-                  - elasticloadbalancing:ModifyTargetGroupAttributes
-                Resource: "*"
+        - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForEC2
 
   InstanceRole:
     Type: AWS::IAM::Role
