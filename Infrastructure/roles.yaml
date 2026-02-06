@@ -106,8 +106,8 @@ Resources:
                 Resource: arn:aws:s3:::dev-secondary-dr-bucket-us-west-1/*
 
 Outputs: 
-  CodeBuildRoleArn:
-    Value: !GetAtt CodeBuildRole.Arn
+  TestBuildRoleArn:
+    Value: !GetAtt TestBuildRole.Arn
   
   CodeDeployServiceRoleArn:
     Value: !GetAtt CodeDeployServiceRole.Arn
