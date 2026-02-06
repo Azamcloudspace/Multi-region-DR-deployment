@@ -84,33 +84,33 @@ phases:
         SCRIPTS_DIR="app/scripts"  
         SCRIPT_ERRORS=0
         
-        if [ -f "$SCRIPTS_DIR/backup_blue.sh" ]; then
+        if [ -f "$SCRIPTS_DIR/backup_blue_script.sh" ]; then
           echo "✓ backup_blue.sh exists"
-          bash -n "$SCRIPTS_DIR/backup_blue.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
+          bash -n "$SCRIPTS_DIR/backup_blue_script.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
         else
           echo "✗ backup_blue.sh not found"
           SCRIPT_ERRORS=$((SCRIPT_ERRORS + 1))
         fi
         
-        if [ -f "$SCRIPTS_DIR/set_permissions.sh" ]; then
+        if [ -f "$SCRIPTS_DIR/set_permissions_script.sh" ]; then
           echo "✓ set_permissions.sh exists"
-          bash -n "$SCRIPTS_DIR/set_permissions.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
+          bash -n "$SCRIPTS_DIR/set_permissions_script.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
         else
           echo "✗ set_permissions.sh not found"
           SCRIPT_ERRORS=$((SCRIPT_ERRORS + 1))
         fi
         
-        if [ -f "$SCRIPTS_DIR/restart_server.sh" ]; then
+        if [ -f "$SCRIPTS_DIR/restart_server_script.sh" ]; then
           echo "✓ restart_server.sh exists"
-          bash -n "$SCRIPTS_DIR/restart_server.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
+          bash -n "$SCRIPTS_DIR/restart_server_script.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
         else
           echo "✗ restart_server.sh not found"
           SCRIPT_ERRORS=$((SCRIPT_ERRORS + 1))
         fi
         
-        if [ -f "$SCRIPTS_DIR/validate.sh" ]; then
+        if [ -f "$SCRIPTS_DIR/validate_script.sh" ]; then
           echo "✓ validate.sh exists"
-          bash -n "$SCRIPTS_DIR/validate.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
+          bash -n "$SCRIPTS_DIR/validate_script.sh" && echo "  ✓ Valid bash syntax" || ((SCRIPT_ERRORS++))
         else
           echo "✗ validate.sh not found"
           SCRIPT_ERRORS=$((SCRIPT_ERRORS + 1))
