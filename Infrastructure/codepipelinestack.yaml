@@ -137,11 +137,6 @@ Resources:
                 ApplicationName: !Sub "${EnvironmentName}-CodeDeployApp"
                 DeploymentGroupName: !Sub "${EnvironmentName}-dg"
 
-      LogsConfig:
-        CloudWatchLogs:
-          Status: ENABLED
-          GroupName: /aws/codepipeline/MultiRegionDR
-
       Tags:
         - Key: Name
           Value: !Sub "${EnvironmentName}-Pipeline"
@@ -149,6 +144,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
