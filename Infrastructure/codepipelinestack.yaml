@@ -73,6 +73,7 @@ Resources:
                   - codedeploy:GetDeployment
                   - codedeploy:GetDeploymentGroup
                   - codedeploy:RegisterApplicationRevision
+                  - codedeploy:GetDeploymentConfig
                 Resource: "*"
 
               - Effect: Allow
@@ -150,6 +151,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
