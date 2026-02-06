@@ -61,6 +61,7 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2FullAccess
 
   InstanceRole:
     Type: AWS::IAM::Role
