@@ -17,21 +17,21 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/backup_blue_script.sh
+    - location: app/scripts/backup_blue_script.sh
       timeout: 60
       runas: root
   
   AfterInstall:
-    - location: scripts/set_permissions_script.sh
+    - location: app/scripts/set_permissions_script.sh
       timeout: 60
       runas: root
   
   ApplicationStart:
-    - location: scripts/restart_server_script.sh
+    - location: app/scripts/restart_server_script.sh
       timeout: 60
       runas: root
   
   ValidateService:
-    - location: scripts/validate_script.sh
+    - location: app/scripts/validate_script.sh
       timeout: 120
       runas: root
